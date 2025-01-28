@@ -1,15 +1,25 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  Home,
+  Error,
+  CreateRestaurant,
+  UpdateRestaurant,
+  UpdateUser,
+} from "./pages/index";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<h1>Home Page</h1>} />
-        <Route path="/create" element={<h1>Create Restaurant</h1>} />
-        <Route path="/restaurant" element={<h1>Restaurant</h1>} />
-        <Route path="/restaurant/update" element={<h1>Restaurant Update</h1>} />
-        <Route path="/user/update" element={<h1>Profile Update</h1>} />
-        <Route path="*" element={<h1>Error</h1>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/create" element={<CreateRestaurant />} />
+        <Route path="/restaurant" element={<UpdateRestaurant />} />
+
+        {/* Propably don't need this update route here, let's see*/}
+        {/* <Route path="/restaurant/update" element={<UpdateRestaurant />} /> */}
+
+        <Route path="/user/update" element={<UpdateUser />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </BrowserRouter>
   );
