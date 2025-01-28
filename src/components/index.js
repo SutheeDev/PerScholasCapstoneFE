@@ -5,5 +5,15 @@ import Loading from "./Loading";
 import Logo from "./Logo";
 import Message from "./Message";
 import NavigationIcon from "./NavigationIcon";
+import Search from "./Search";
 
-export { BackIcon, Card, CloseIcon, Loading, Logo, Message, NavigationIcon };
+export {
+  BackIcon,
+  Card,
+  CloseIcon,
+  Loading,
+  Logo,
+  Message,
+  NavigationIcon,
+  Search,
+};
