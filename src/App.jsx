@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Home,
@@ -10,6 +10,7 @@ import {
 import apiClient from "./utils/apiClient";
 
 const userId = import.meta.env.VITE_USER_ID;
+const globalContext = createContext();
 
 const App = () => {
   const [user, setUser] = useState({});
@@ -28,19 +29,22 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/create" element={<CreateRestaurant />} />
-        <Route path="/restaurant" element={<UpdateRestaurant />} />
+    <globalContext.Provider value={user}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create" element={<CreateRestaurant />} />
+          <Route path="/restaurant" element={<UpdateRestaurant />} />
 
-        {/* Propably don't need this update route here, let's see*/}
-        {/* <Route path="/restaurant/update" element={<UpdateRestaurant />} /> */}
+          {/* Propably don't need this update route here, let's see*/}
+          {/* <Route path="/restaurant/update" element={<UpdateRestaurant />} /> */}
 
-        <Route path="/user/update" element={<UpdateUser />} />
-        <Route path="*" element={<Error />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="/user/update" element={<UpdateUser />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </BrowserRouter>
+    </globalContext.Provider>
   );
 };
+export const useGlobalContext = () => useContext(globalContext);
 export default App;

@@ -1,13 +1,15 @@
 import { Logo, UserIcon, NavigationIcon, Card } from "../components/index";
 import styled from "styled-components";
 
-// home
+// import icons
 import { FiHome } from "react-icons/fi";
-
-// Create
 import { FiPlusCircle } from "react-icons/fi";
+import { useGlobalContext } from "../App";
 
 const Home = () => {
+  const data = useGlobalContext();
+  console.log(data.name);
+
   return (
     <main>
       <nav>

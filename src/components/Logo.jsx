@@ -6,6 +6,6 @@ const Logo = () => {
 export default Logo;
 
 const Wrapper = styled.h1`
-  font-size: 36px;
+  font-size: 28px;
   color: var(--text-secondary-color);
 `;
