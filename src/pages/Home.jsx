@@ -1,6 +1,12 @@
 import { Logo, UserIcon, NavigationIcon, Card } from "../components/index";
 import styled from "styled-components";
 
+// home
+import { FiHome } from "react-icons/fi";
+
+// Create
+import { FiPlusCircle } from "react-icons/fi";
+
 const Home = () => {
   return (
     <main>
@@ -11,13 +17,12 @@ const Home = () => {
         </NavContainer>
       </nav>
 
-      <div>
+      <Content>
         <aside>
-          <div className="sidebar-container">
-            <NavigationIcon />
-            <NavigationIcon />
-            <NavigationIcon />
-          </div>
+          <SidebarContainer>
+            <NavigationIcon icon={<FiHome />} />
+            <NavigationIcon icon={<FiPlusCircle />} />
+          </SidebarContainer>
         </aside>
 
         <section>
@@ -33,7 +38,7 @@ const Home = () => {
             </section>
           </div>
         </section>
-      </div>
+      </Content>
     </main>
   );
 };
@@ -43,4 +48,18 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: var(--container-padding);
+`;
+
+const Content = styled.div`
+  display: flex;
+  height: calc(100vh - 137px);
+  /* background-color: wheat; */
+`;
+
+const SidebarContainer = styled.div`
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+  display: flex;
+  flex-direction: column;
+  row-gap: 48px;
 `;

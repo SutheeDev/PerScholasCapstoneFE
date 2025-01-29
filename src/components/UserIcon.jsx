@@ -22,6 +22,7 @@ const Wrapper = styled.div`
   gap: 4px;
   justify-content: space-between;
   align-items: center;
+  color: var(--text-color);
   cursor: pointer;
 
   .userIcon-container {
