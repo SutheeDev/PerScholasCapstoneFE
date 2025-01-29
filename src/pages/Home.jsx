@@ -7,9 +7,6 @@ import { FiPlusCircle } from "react-icons/fi";
 import { useGlobalContext } from "../App";
 
 const Home = () => {
-  const data = useGlobalContext();
-  console.log(data.name);
-
   return (
     <main>
       <nav>

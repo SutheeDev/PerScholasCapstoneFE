@@ -14,6 +14,7 @@ const globalContext = createContext();
 
 const App = () => {
   const [user, setUser] = useState({});
+  const [restaurants, setRestaurants] = useState([]);
 
   const getUser = async () => {
     try {
@@ -24,12 +25,22 @@ const App = () => {
     }
   };
 
+  const getRestaurants = async () => {
+    try {
+      const response = await apiClient.get(`/restaurants/${userId}`);
+      setRestaurants(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUser();
+    getRestaurants();
   }, []);
 
   return (
-    <globalContext.Provider value={user}>
+    <globalContext.Provider value={(user, restaurants)}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
