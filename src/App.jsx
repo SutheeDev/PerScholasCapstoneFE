@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Home,
@@ -12,13 +12,20 @@ import apiClient from "./utils/apiClient";
 const userId = import.meta.env.VITE_USER_ID;
 
 const App = () => {
-  // const getUser = async () => {
-  //   const response = await apiClient.get("/");
-  // };
+  const [user, setUser] = useState({});
 
-  // useEffect(() => {
-  //   console.log(userId);
-  // }, []);
+  const getUser = async () => {
+    try {
+      const response = await apiClient.get(`/user/${userId}`);
+      setUser(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <BrowserRouter>

@@ -26,8 +26,8 @@ const Home = () => {
         </aside>
 
         <section>
-          <div className="cards-container">
-            <h1>Welcome Pete!</h1>
+          <CardsContainer>
+            <h1 className="greeting">Welcome Suthee!</h1>
             <section className="cards">
               <Card />
               <Card />
@@ -36,7 +36,7 @@ const Home = () => {
               <Card />
               <Card />
             </section>
-          </div>
+          </CardsContainer>
         </section>
       </Content>
     </main>
@@ -52,7 +52,7 @@ const NavContainer = styled.div`
 
 const Content = styled.div`
   display: flex;
-  height: calc(100vh - 137px);
+  min-height: calc(100vh - 137px);
   /* background-color: wheat; */
 `;
 
@@ -62,4 +62,19 @@ const SidebarContainer = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 48px;
+`;
+
+const CardsContainer = styled.div`
+  padding-right: var(--container-padding);
+
+  .greeting {
+    font-size: 62px;
+    margin-bottom: 50px;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
 `;
