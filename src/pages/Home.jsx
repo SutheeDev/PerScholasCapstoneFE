@@ -30,12 +30,9 @@ const Home = () => {
           <CardsContainer>
             <h1 className="greeting">{`Welcome ${user.name}!`}</h1>
             <section className="cards">
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
-              <Card />
+              {restaurants.map((res) => (
+                <Card key={res._id} restaurant={res} />
+              ))}
             </section>
           </CardsContainer>
         </section>
