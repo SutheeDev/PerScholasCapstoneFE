@@ -5,13 +5,13 @@
 }
 
 @font-face {
-  src: url("../public/fonts/PPPangramSans-Light.otf") format("opentype");
+  src: url("/fonts/PPPangramSans-Light.otf") format("opentype");
   font-family: "PangramSans-Light";
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  src: url("../public/fonts/PPPangramSans-Medium.otf") format("opentype");
+  src: url("/fonts/PPPangramSans-Medium.otf") format("opentype");
   font-family: "PangramSans-Medium";
   font-weight: 600;
   font-style: normal;
@@ -25,9 +25,19 @@
   /* Colors */
   --orange: #ff5252;
   --black: #000000;
+  --white: #ffffff;
   --gray: #f2f2f2;
+
+  --bg-color: var(--white);
+  --text-color: var(--black);
+  --bg-secondary-color: var(--gray);
+  --text-secondary-color: var(--orange);
+
+  /* Padding */
+  --container-padding: 48px;
 }
 
 body {
   font-family: var(--primary-font-light);
+  color: var(--text-color);
 }

@@ -12,13 +12,13 @@ import apiClient from "./utils/apiClient";
 const userId = import.meta.env.VITE_USER_ID;
 
 const App = () => {
-  const getUser = async () => {
-    const response = await apiClient.get("/");
-  };
+  // const getUser = async () => {
+  //   const response = await apiClient.get("/");
+  // };
 
-  useEffect(() => {
-    console.log(userId);
-  }, []);
+  // useEffect(() => {
+  //   console.log(userId);
+  // }, []);
 
   return (
     <BrowserRouter>

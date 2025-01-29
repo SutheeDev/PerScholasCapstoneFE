@@ -5,7 +5,7 @@ import Loading from "./Loading";
 import Logo from "./Logo";
 import Message from "./Message";
 import NavigationIcon from "./NavigationIcon";
-import Search from "./Search";
+import UserIcon from "./UserIcon";
 
 export {
   BackIcon,
@@ -15,5 +15,5 @@ export {
   Logo,
   Message,
   NavigationIcon,
-  Search,
+  UserIcon,
 };
