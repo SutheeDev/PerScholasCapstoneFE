@@ -1,12 +1,14 @@
 import { Logo, UserIcon, NavigationIcon, Card } from "../components/index";
+import { useGlobalContext } from "../App";
 import styled from "styled-components";
 
 // import icons
 import { FiHome } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
-import { useGlobalContext } from "../App";
 
 const Home = () => {
+  const { user, restaurants } = useGlobalContext();
+
   return (
     <main>
       <nav>
@@ -26,7 +28,7 @@ const Home = () => {
 
         <section>
           <CardsContainer>
-            <h1 className="greeting">Welcome Suthee!</h1>
+            <h1 className="greeting">{`Welcome ${user.name}!`}</h1>
             <section className="cards">
               <Card />
               <Card />

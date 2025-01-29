@@ -40,7 +40,7 @@ const App = () => {
   }, []);
 
   return (
-    <globalContext.Provider value={(user, restaurants)}>
+    <globalContext.Provider value={{ user, restaurants }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
