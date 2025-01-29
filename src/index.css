@@ -3,3 +3,31 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  src: url("../public/fonts/PPPangramSans-Light.otf") format("opentype");
+  font-family: "PangramSans-Light";
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  src: url("../public/fonts/PPPangramSans-Medium.otf") format("opentype");
+  font-family: "PangramSans-Medium";
+  font-weight: 600;
+  font-style: normal;
+}
+
+:root {
+  /* Fonts */
+  --primary-font-light: "PangramSans-Light";
+  --primary-font-medium: "PangramSans-Medium";
+
+  /* Colors */
+  --orange: #ff5252;
+  --black: #000000;
+  --gray: #f2f2f2;
+}
+
+body {
+  font-family: var(--primary-font-light);
+}
