@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <section>
       <CardsContainer>
-        <h1 className="greeting">{`Welcome ${user.name}!`}</h1>
+        <h1 className="heading">{`Welcome ${user.name}!`}</h1>
         <section className="cards">
           {restaurants.map((res) => (
             <Card key={res._id} restaurant={res} />
@@ -22,11 +22,6 @@ export default Home;
 
 const CardsContainer = styled.div`
   padding-right: var(--container-padding);
-
-  .greeting {
-    font-size: 62px;
-    margin-bottom: 50px;
-  }
 
   .cards {
     display: grid;

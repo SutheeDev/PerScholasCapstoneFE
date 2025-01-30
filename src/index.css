@@ -41,3 +41,8 @@ body {
   font-family: var(--primary-font-light);
   color: var(--text-color);
 }
+
+.heading {
+  font-size: 62px;
+  margin-bottom: 50px;
+}
