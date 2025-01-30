@@ -23,7 +23,7 @@ const CreateRestaurant = () => {
           <label htmlFor="date">Date Visit</label>
           <input type="date" name="date" id="date" />
           <label htmlFor="rating">Rating</label>
-          <RateRangeEl />
+          <RateRangeEl Icon={TiStarFullOutline} num={5} />
           <label htmlFor="price">Price</label>
           <BiDollar className="dollar" />
           <BiDollar className="dollar" />

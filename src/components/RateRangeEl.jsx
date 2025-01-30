@@ -2,26 +2,26 @@ import { useState } from "react";
 import styled from "styled-components";
 import { TiStarFullOutline } from "react-icons/ti";
 
-const RateRangeEl = () => {
+const RateRangeEl = ({ Icon, num }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
 
-  const arr = [1, 2, 3, 4, 5];
+  const arr = Array.from({ length: num }, (_, i) => i + 1);
 
   return (
     <RangeEl>
-      {arr.map((star) => (
-        <TiStarFullOutline
-          key={star}
-          className="star"
+      {arr.map((el) => (
+        <Icon
+          key={el}
+          className="el"
           color={
-            star <= (hover || rating)
+            el <= (hover || rating)
               ? "var(--text-secondary-color)"
               : "var(--bg-secondary-color)"
           }
-          onMouseEnter={() => setHover(star)}
+          onMouseEnter={() => setHover(el)}
           onMouseLeave={() => setHover(0)}
-          onClick={() => setRating(star)}
+          onClick={() => setRating(el)}
         />
       ))}
     </RangeEl>
@@ -30,9 +30,8 @@ const RateRangeEl = () => {
 export default RateRangeEl;
 
 const RangeEl = styled.div`
-  .star {
+  .el {
     font-size: 20px;
     cursor: pointer;
-    /* color: var(--bg-secondary-color); */
   }
 `;
