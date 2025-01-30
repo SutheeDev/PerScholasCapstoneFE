@@ -9,6 +9,7 @@ import UserIcon from "./UserIcon";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import RateRangeEl from "./RateRangeEl";
+import FormRow from "./FormRow";
 
 export {
   BackIcon,
@@ -22,4 +23,5 @@ export {
   Navbar,
   Sidebar,
   RateRangeEl,
+  FormRow,
 };

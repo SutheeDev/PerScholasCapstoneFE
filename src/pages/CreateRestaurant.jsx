@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RateRangeEl } from "../components";
+import { RateRangeEl, FormRow } from "../components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
@@ -34,19 +34,27 @@ const CreateRestaurant = () => {
         <input className="image-upload" type="file" name="" id="" />
         <div className="form-inputs">
           {/* Restaurant name */}
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
+          <FormRow
+            type={"text"}
+            name={"title"}
             value={entry.name}
-            onChange={(e) => setEntry({ ...entry, name: e.target.value })}
+            handleChange={(e) => setEntry({ ...entry, name: e.target.value })}
           />
 
           <label htmlFor="review">Review</label>
           <textarea name="review" id="review"></textarea>
-          <label htmlFor="cuisine">Cuisine</label>
-          <input type="text" name="cuisine" id="cuisine" />
+
+          {/* Cuisine */}
+          <FormRow
+            type={"text"}
+            name={"cuisine"}
+            value={entry.cuisine}
+            handleChange={(e) =>
+              setEntry({ ...entry, cuisine: e.target.value })
+            }
+          />
+          {/* <label htmlFor="cuisine">Cuisine</label>
+          <input type="text" name="cuisine" id="cuisine" /> */}
 
           {/* visitDate */}
           {/* https://reactdatepicker.com/ */}
