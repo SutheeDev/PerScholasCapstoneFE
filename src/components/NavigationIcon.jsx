@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-const NavigationIcon = ({ icon }) => {
-  return <Wrapper>{icon}</Wrapper>;
+const NavigationIcon = ({ icon, destination }) => {
+  return (
+    <Wrapper>
+      <Link to={destination}>{icon}</Link>
+    </Wrapper>
+  );
 };
 export default NavigationIcon;
 

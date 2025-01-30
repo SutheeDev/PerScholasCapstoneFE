@@ -6,6 +6,7 @@ import Logo from "./Logo";
 import Message from "./Message";
 import NavigationIcon from "./NavigationIcon";
 import UserIcon from "./UserIcon";
+import Navbar from "./Navbar";
 
 export {
   BackIcon,
@@ -16,4 +17,5 @@ export {
   Message,
   NavigationIcon,
   UserIcon,
+  Navbar,
 };

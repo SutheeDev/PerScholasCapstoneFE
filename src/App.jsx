@@ -6,6 +6,7 @@ import {
   CreateRestaurant,
   UpdateRestaurant,
   UpdateUser,
+  DashboardLayout,
 } from "./pages/index";
 import apiClient from "./utils/apiClient";
 
@@ -43,9 +44,11 @@ const App = () => {
     <globalContext.Provider value={{ user, restaurants }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/create" element={<CreateRestaurant />} />
-          <Route path="/restaurant" element={<UpdateRestaurant />} />
+          <Route path="/" element={<DashboardLayout />}>
+            <Route index element={<Home />} />
+            <Route path="/create" element={<CreateRestaurant />} />
+            <Route path="/restaurant" element={<UpdateRestaurant />} />
+          </Route>
 
           {/* Propably don't need this update route here, let's see*/}
           {/* <Route path="/restaurant/update" element={<UpdateRestaurant />} /> */}

@@ -1,4 +1,4 @@
-import { Logo, UserIcon, NavigationIcon, Card } from "../components/index";
+import { NavigationIcon, Card } from "../components/index";
 import { useGlobalContext } from "../App";
 import styled from "styled-components";
 
@@ -11,18 +11,11 @@ const Home = () => {
 
   return (
     <main>
-      <nav>
-        <NavContainer>
-          <Logo />
-          <UserIcon />
-        </NavContainer>
-      </nav>
-
       <Content>
         <aside>
           <SidebarContainer>
-            <NavigationIcon icon={<FiHome />} />
-            <NavigationIcon icon={<FiPlusCircle />} />
+            <NavigationIcon icon={<FiHome />} destination="/" />
+            <NavigationIcon icon={<FiPlusCircle />} destination="/create" />
           </SidebarContainer>
         </aside>
 
@@ -41,12 +34,6 @@ const Home = () => {
   );
 };
 export default Home;
-
-const NavContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  padding: var(--container-padding);
-`;
 
 const Content = styled.div`
   display: flex;
