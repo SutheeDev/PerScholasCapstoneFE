@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { RateRangeEl } from "../components";
 
 // Import Icons
 import { CiStar } from "react-icons/ci";
@@ -22,11 +23,12 @@ const CreateRestaurant = () => {
           <label htmlFor="date">Date Visit</label>
           <input type="date" name="date" id="date" />
           <label htmlFor="rating">Rating</label>
+          <RateRangeEl />
+          {/* <TiStarFullOutline className="star" />
           <TiStarFullOutline className="star" />
           <TiStarFullOutline className="star" />
           <TiStarFullOutline className="star" />
-          <TiStarFullOutline className="star" />
-          <TiStarFullOutline className="star" />
+          <TiStarFullOutline className="star" /> */}
           <label htmlFor="price">Price</label>
           <BiDollar className="dollar" />
           <BiDollar className="dollar" />
@@ -60,13 +62,5 @@ const CardsContainer = styled.div`
   label,
   input {
     display: block;
-  }
-
-  .star {
-    font-size: 20px;
-    color: var(--bg-secondary-color);
-    &:hover {
-      color: var(--text-secondary-color);
-    }
   }
 `;

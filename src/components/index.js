@@ -8,6 +8,7 @@ import NavigationIcon from "./NavigationIcon";
 import UserIcon from "./UserIcon";
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
+import RateRangeEl from "./RateRangeEl";
 
 export {
   BackIcon,
@@ -20,4 +21,5 @@ export {
   UserIcon,
   Navbar,
   Sidebar,
+  RateRangeEl,
 };
