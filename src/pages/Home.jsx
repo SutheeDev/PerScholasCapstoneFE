@@ -1,53 +1,24 @@
-import { NavigationIcon, Card } from "../components/index";
+import { Card } from "../components/index";
 import { useGlobalContext } from "../App";
 import styled from "styled-components";
-
-// import icons
-import { FiHome } from "react-icons/fi";
-import { FiPlusCircle } from "react-icons/fi";
 
 const Home = () => {
   const { user, restaurants } = useGlobalContext();
 
   return (
-    <main>
-      <Content>
-        <aside>
-          <SidebarContainer>
-            <NavigationIcon icon={<FiHome />} destination="/" />
-            <NavigationIcon icon={<FiPlusCircle />} destination="/create" />
-          </SidebarContainer>
-        </aside>
-
-        <section>
-          <CardsContainer>
-            <h1 className="greeting">{`Welcome ${user.name}!`}</h1>
-            <section className="cards">
-              {restaurants.map((res) => (
-                <Card key={res._id} restaurant={res} />
-              ))}
-            </section>
-          </CardsContainer>
+    <section>
+      <CardsContainer>
+        <h1 className="greeting">{`Welcome ${user.name}!`}</h1>
+        <section className="cards">
+          {restaurants.map((res) => (
+            <Card key={res._id} restaurant={res} />
+          ))}
         </section>
-      </Content>
-    </main>
+      </CardsContainer>
+    </section>
   );
 };
 export default Home;
-
-const Content = styled.div`
-  display: flex;
-  min-height: calc(100vh - 137px);
-  /* background-color: wheat; */
-`;
-
-const SidebarContainer = styled.div`
-  padding-left: var(--container-padding);
-  padding-right: var(--container-padding);
-  display: flex;
-  flex-direction: column;
-  row-gap: 48px;
-`;
 
 const CardsContainer = styled.div`
   padding-right: var(--container-padding);
