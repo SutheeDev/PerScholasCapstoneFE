@@ -33,8 +33,16 @@ const CreateRestaurant = () => {
       <form action="">
         <input className="image-upload" type="file" name="" id="" />
         <div className="form-inputs">
+          {/* Restaurant name */}
           <label htmlFor="title">Title</label>
-          <input type="text" name="title" id="title" />
+          <input
+            type="text"
+            name="title"
+            id="title"
+            value={entry.name}
+            onChange={(e) => setEntry({ ...entry, name: e.target.value })}
+          />
+
           <label htmlFor="review">Review</label>
           <textarea name="review" id="review"></textarea>
           <label htmlFor="cuisine">Cuisine</label>
