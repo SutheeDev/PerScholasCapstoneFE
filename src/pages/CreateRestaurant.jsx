@@ -1,6 +1,8 @@
 import { useState } from "react";
-import styled from "styled-components";
 import { RateRangeEl } from "../components";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import styled from "styled-components";
 
 // Import Icons
 import { TiStarFullOutline } from "react-icons/ti";
@@ -19,6 +21,12 @@ const initialState = {
 const CreateRestaurant = () => {
   const [entry, setEntry] = useState(initialState);
 
+  // Convert date into ISO format
+  const handleDate = (date) => {
+    const isoDate = date.toISOString();
+    setEntry({ ...entry, visitDate: isoDate });
+  };
+
   return (
     <CardsContainer>
       <h1 className="heading">Create Entry</h1>
@@ -31,8 +39,20 @@ const CreateRestaurant = () => {
           <textarea name="review" id="review"></textarea>
           <label htmlFor="cuisine">Cuisine</label>
           <input type="text" name="cuisine" id="cuisine" />
+
+          {/* visitDate */}
+          {/* https://reactdatepicker.com/ */}
           <label htmlFor="date">Date Visit</label>
-          <input type="date" name="date" id="date" />
+          <DatePicker
+            selected={entry.visitDate}
+            onChange={(date) => handleDate(date)}
+            closeOnScroll={true}
+            maxDate={new Date()}
+            placeholderText="Click to select a date"
+            dateFormat="MM / dd / yyyy"
+          />
+
+          {/* Rating */}
           <label htmlFor="rating">Rating</label>
           <RateRangeEl
             Icon={TiStarFullOutline}
@@ -40,6 +60,8 @@ const CreateRestaurant = () => {
             onClick={(e) => setEntry({ ...entry, rating: e })}
             range={entry.rating}
           />
+
+          {/* PriceRange */}
           <label htmlFor="price">Price</label>
           <RateRangeEl
             Icon={BiDollar}
