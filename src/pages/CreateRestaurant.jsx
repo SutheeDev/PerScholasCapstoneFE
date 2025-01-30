@@ -18,14 +18,8 @@ const initialState = {
 
 const CreateRestaurant = () => {
   const [entry, setEntry] = useState(initialState);
-  const [rating, setRating] = useState(0);
-
-  const handleRating = (el) => {
-    console.log("handle rating here");
-  };
 
   return (
-    // <section>
     <CardsContainer>
       <h1 className="heading">Create Entry</h1>
       <form action="">
@@ -43,8 +37,8 @@ const CreateRestaurant = () => {
           <RateRangeEl
             Icon={TiStarFullOutline}
             num={5}
-            onClick={(e) => handleRating(e)}
-            // handleClick={handleRating}
+            onClick={(e) => setEntry({ ...entry, rating: e })}
+            range={entry.rating}
           />
           <label htmlFor="price">Price</label>
           {/* <RateRangeEl Icon={BiDollar} num={4} /> */}
@@ -54,7 +48,6 @@ const CreateRestaurant = () => {
         </div>
       </form>
     </CardsContainer>
-    // {/* </section> */}
   );
 };
 export default CreateRestaurant;
