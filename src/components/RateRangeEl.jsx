@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { TiStarFullOutline } from "react-icons/ti";
 
-const RateRangeEl = ({ Icon, num }) => {
+const RateRangeEl = ({ Icon, num, onClick }) => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
 
@@ -21,7 +20,8 @@ const RateRangeEl = ({ Icon, num }) => {
           }
           onMouseEnter={() => setHover(el)}
           onMouseLeave={() => setHover(0)}
-          onClick={() => setRating(el)}
+          onClick={() => onClick(el)}
+          //   onClick={() => setRating(el)}
         />
       ))}
     </RangeEl>

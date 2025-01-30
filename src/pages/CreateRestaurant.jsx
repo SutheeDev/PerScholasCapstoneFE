@@ -1,12 +1,29 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { RateRangeEl } from "../components";
 
 // Import Icons
-import { CiStar } from "react-icons/ci";
 import { TiStarFullOutline } from "react-icons/ti";
 import { BiDollar } from "react-icons/bi";
 
+const initialState = {
+  name: "",
+  cuisine: "",
+  visitDate: "",
+  rating: 0,
+  review: "",
+  priceRange: "",
+  image: "",
+};
+
 const CreateRestaurant = () => {
+  const [entry, setEntry] = useState(initialState);
+  const [rating, setRating] = useState(0);
+
+  const handleRating = (el) => {
+    console.log("handle rating here");
+  };
+
   return (
     // <section>
     <CardsContainer>
@@ -23,13 +40,15 @@ const CreateRestaurant = () => {
           <label htmlFor="date">Date Visit</label>
           <input type="date" name="date" id="date" />
           <label htmlFor="rating">Rating</label>
-          <RateRangeEl Icon={TiStarFullOutline} num={5} />
+          <RateRangeEl
+            Icon={TiStarFullOutline}
+            num={5}
+            onClick={(e) => handleRating(e)}
+            // handleClick={handleRating}
+          />
           <label htmlFor="price">Price</label>
-          <BiDollar className="dollar" />
-          <BiDollar className="dollar" />
-          <BiDollar className="dollar" />
-          <BiDollar className="dollar" />
-          <BiDollar className="dollar" />
+          {/* <RateRangeEl Icon={BiDollar} num={4} /> */}
+
           <button>Save Entry</button>
           <button>Cancel</button>
         </div>
