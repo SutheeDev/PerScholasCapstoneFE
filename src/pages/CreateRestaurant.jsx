@@ -12,7 +12,7 @@ const initialState = {
   visitDate: "",
   rating: 0,
   review: "",
-  priceRange: "",
+  priceRange: 0,
   image: "",
 };
 
@@ -41,7 +41,12 @@ const CreateRestaurant = () => {
             range={entry.rating}
           />
           <label htmlFor="price">Price</label>
-          {/* <RateRangeEl Icon={BiDollar} num={4} /> */}
+          <RateRangeEl
+            Icon={BiDollar}
+            num={4}
+            onClick={(e) => setEntry({ ...entry, priceRange: e })}
+            range={entry.priceRange}
+          />
 
           <button>Save Entry</button>
           <button>Cancel</button>
