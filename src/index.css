@@ -46,3 +46,7 @@ body {
   font-size: 62px;
   margin-bottom: 50px;
 }
+
+.btn {
+  cursor: pointer;
+}

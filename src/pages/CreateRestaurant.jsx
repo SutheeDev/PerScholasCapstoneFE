@@ -2,7 +2,7 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RateRangeEl, FormRow } from "../components";
 import apiClient from "../utils/apiClient";
 import { useGlobalContext } from "../App";
@@ -18,7 +18,6 @@ const initialState = {
   rating: 0,
   review: "",
   priceRange: "",
-  image: "",
 };
 
 const CreateRestaurant = () => {
@@ -27,6 +26,8 @@ const CreateRestaurant = () => {
   const { user } = useGlobalContext();
   const userId = user._id;
 
+  const navigate = useNavigate();
+
   // Convert date into ISO format
   const handleDate = (date) => {
     const isoDate = date.toISOString();
@@ -34,6 +35,7 @@ const CreateRestaurant = () => {
   };
 
   const handlePriceRange = (priceRange) => {
+    // Convert number into a string of "$"
     let priceSymbol = "";
     for (let i = 0; i < priceRange; i++) {
       priceSymbol += "$";
@@ -43,11 +45,10 @@ const CreateRestaurant = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submitted!");
 
     try {
-      const response = await apiClient.post(`/restaurants/${userId}`, entry);
-      // console.log(response);
+      await apiClient.post(`/restaurants/${userId}`, entry);
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -117,7 +118,9 @@ const CreateRestaurant = () => {
             range={entry.priceRange.length}
           />
 
-          <button type="submit">Save Entry</button>
+          <button className="btn" type="submit">
+            Save Entry
+          </button>
           <Link to="/">Cancel</Link>
         </div>
       </form>
