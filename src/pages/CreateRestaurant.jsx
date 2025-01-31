@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import axios from "axios";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import { RateRangeEl, FormRow } from "../components";
@@ -43,6 +44,51 @@ const CreateRestaurant = () => {
     setEntry({ ...entry, priceRange: priceSymbol });
   };
 
+  const presetName = import.meta.env.VITE_UPLOAD_PRESET_NAME;
+  const cloudName = import.meta.env.VITE_CLOUD_NAME;
+
+  const uploadImage = async (file) => {
+    console.log(file);
+    // https://cloudinary.com/blog/guest_post/how-the-formdata-browser-api-works
+    const formData = new FormData();
+
+    if (file) {
+      formData.append("file", file);
+    } else {
+      console.log("there is no file!");
+    }
+
+    formData.append("upload_preset", presetName);
+    formData.append("folder", "DineDiary");
+    console.log(formData);
+
+    try {
+      // https://cloudinary.com/documentation/image_upload_api_reference
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      const data = response.data;
+      console.log(data);
+      console.log("success");
+    } catch (error) {
+      console.error(
+        "Error uploading image:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    await uploadImage(file);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -58,7 +104,13 @@ const CreateRestaurant = () => {
     <CardsContainer>
       <h1 className="heading">Create Entry</h1>
       <form onSubmit={handleSubmit}>
-        <input className="image-upload" type="file" name="" id="" />
+        <input
+          className="image-upload"
+          type="file"
+          name="image"
+          id="image"
+          onChange={(e) => handleFileChange(e)}
+        />
         <div className="form-inputs">
           {/* Restaurant name */}
           <FormRow
