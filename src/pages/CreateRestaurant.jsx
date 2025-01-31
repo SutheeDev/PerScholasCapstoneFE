@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { RateRangeEl, FormRow } from "../components";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { RateRangeEl, FormRow } from "../components";
+import apiClient from "../utils/apiClient";
+import { useGlobalContext } from "../App";
 
 // Import Icons
 import { TiStarFullOutline } from "react-icons/ti";
@@ -14,12 +17,15 @@ const initialState = {
   visitDate: "",
   rating: 0,
   review: "",
-  priceRange: 0,
+  priceRange: "",
   image: "",
 };
 
 const CreateRestaurant = () => {
   const [entry, setEntry] = useState(initialState);
+
+  const { user } = useGlobalContext();
+  const userId = user._id;
 
   // Convert date into ISO format
   const handleDate = (date) => {
@@ -27,10 +33,30 @@ const CreateRestaurant = () => {
     setEntry({ ...entry, visitDate: isoDate });
   };
 
+  const handlePriceRange = (priceRange) => {
+    let priceSymbol = "";
+    for (let i = 0; i < priceRange; i++) {
+      priceSymbol += "$";
+    }
+    setEntry({ ...entry, priceRange: priceSymbol });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("submitted!");
+
+    try {
+      const response = await apiClient.post(`/restaurants/${userId}`, entry);
+      // console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <CardsContainer>
       <h1 className="heading">Create Entry</h1>
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <input className="image-upload" type="file" name="" id="" />
         <div className="form-inputs">
           {/* Restaurant name */}
@@ -41,8 +67,15 @@ const CreateRestaurant = () => {
             handleChange={(e) => setEntry({ ...entry, name: e.target.value })}
           />
 
-          <label htmlFor="review">Review</label>
-          <textarea name="review" id="review"></textarea>
+          <div>
+            <label htmlFor="review">Review</label>
+            <textarea
+              name="review"
+              id="review"
+              value={entry.review}
+              onChange={(e) => setEntry({ ...entry, review: e.target.value })}
+            ></textarea>
+          </div>
 
           {/* Cuisine */}
           <FormRow
@@ -53,8 +86,6 @@ const CreateRestaurant = () => {
               setEntry({ ...entry, cuisine: e.target.value })
             }
           />
-          {/* <label htmlFor="cuisine">Cuisine</label>
-          <input type="text" name="cuisine" id="cuisine" /> */}
 
           {/* visitDate */}
           {/* https://reactdatepicker.com/ */}
@@ -82,12 +113,12 @@ const CreateRestaurant = () => {
           <RateRangeEl
             Icon={BiDollar}
             num={4}
-            onClick={(e) => setEntry({ ...entry, priceRange: e })}
-            range={entry.priceRange}
+            onClick={(e) => handlePriceRange(e)}
+            range={entry.priceRange.length}
           />
 
-          <button>Save Entry</button>
-          <button>Cancel</button>
+          <button type="submit">Save Entry</button>
+          <Link to="/">Cancel</Link>
         </div>
       </form>
     </CardsContainer>
