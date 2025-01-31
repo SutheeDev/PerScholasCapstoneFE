@@ -48,20 +48,13 @@ const CreateRestaurant = () => {
   const cloudName = import.meta.env.VITE_CLOUD_NAME;
 
   const uploadImage = async (file) => {
-    console.log(file);
     // https://cloudinary.com/blog/guest_post/how-the-formdata-browser-api-works
     const formData = new FormData();
-
-    if (file) {
-      formData.append("file", file);
-    } else {
-      console.log("there is no file!");
-    }
-
+    formData.append("file", file);
     formData.append("upload_preset", presetName);
     formData.append("folder", "DineDiary");
-    console.log(formData);
 
+    // Upload iamge to Cloudinary and get the image url back
     try {
       // https://cloudinary.com/documentation/image_upload_api_reference
       const response = await axios.post(
@@ -70,8 +63,7 @@ const CreateRestaurant = () => {
         { headers: { "Content-Type": "multipart/form-data" } }
       );
       const data = response.data;
-      console.log(data);
-      console.log("success");
+      return data.secure_url;
     } catch (error) {
       console.error(
         "Error uploading image:",
@@ -86,7 +78,13 @@ const CreateRestaurant = () => {
       return;
     }
 
-    await uploadImage(file);
+    const imageUrl = await uploadImage(file);
+
+    if (imageUrl) {
+      setEntry({ ...entry, image: imageUrl });
+    } else {
+      return;
+    }
   };
 
   const handleSubmit = async (e) => {
