@@ -26,12 +26,15 @@
   --orange: #ff5252;
   --black: #000000;
   --white: #ffffff;
-  --gray: #f2f2f2;
+  --gray-200: #f2f2f2;
+  --gray-400: #a0abbb;
 
   --bg-color: var(--white);
   --text-color: var(--black);
-  --bg-secondary-color: var(--gray);
+  --bg-secondary-color: var(--gray-200);
   --text-secondary-color: var(--orange);
+  --text-third-color: var(--gray-400);
+  --upload-icon-color: var(--gray-400);
 
   /* Padding */
   --container-padding: 48px;
