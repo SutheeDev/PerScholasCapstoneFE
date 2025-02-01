@@ -6,16 +6,16 @@ const Home = () => {
   const { user, restaurants } = useGlobalContext();
 
   return (
-    // <section>
     <CardsContainer>
-      <h1 className="heading">{`Welcome ${user.name}!`}</h1>
-      <section className="cards">
-        {restaurants.map((res) => (
-          <Card key={res._id} restaurant={res} />
-        ))}
-      </section>
+      <div className="cards-content">
+        <h1 className="heading">{`Welcome ${user.name}!`}</h1>
+        <section className="cards">
+          {restaurants.map((res) => (
+            <Card key={res._id} restaurant={res} />
+          ))}
+        </section>
+      </div>
     </CardsContainer>
-    // </section>
   );
 };
 export default Home;
@@ -23,6 +23,11 @@ export default Home;
 const CardsContainer = styled.div`
   padding-right: var(--container-padding);
   width: 100%;
+
+  .cards-content {
+    max-width: 1256px;
+    margin: 0 auto;
+  }
 
   .cards {
     display: grid;
