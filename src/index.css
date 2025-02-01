@@ -63,3 +63,8 @@ body {
 .btn:hover {
   transform: scale(1.05);
 }
+
+.page-wrapper {
+  max-width: 1256px;
+  margin: 0 auto;
+}

@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <CardsContainer>
-      <div className="cards-content">
+      <div className="page-wrapper">
         <h1 className="heading">{`Welcome ${user.name}!`}</h1>
         <section className="cards">
           {restaurants.map((res) => (
@@ -23,11 +23,6 @@ export default Home;
 const CardsContainer = styled.div`
   padding-right: var(--container-padding);
   width: 100%;
-
-  .cards-content {
-    max-width: 1256px;
-    margin: 0 auto;
-  }
 
   .cards {
     display: grid;
