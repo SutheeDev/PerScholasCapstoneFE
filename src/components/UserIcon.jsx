@@ -22,7 +22,6 @@ const Wrapper = styled.div`
   gap: 4px;
   justify-content: space-between;
   align-items: center;
-  color: var(--text-color);
   cursor: pointer;
 
   .userIcon-container {
@@ -40,5 +39,9 @@ const Wrapper = styled.div`
   .down-arrow-container {
     width: 16px;
     height: 16px;
+  }
+
+  svg {
+    color: var(--text-color);
   }
 `;

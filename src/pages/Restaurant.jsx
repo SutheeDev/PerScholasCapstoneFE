@@ -4,6 +4,7 @@ import { Navbar } from "../components";
 import styled from "styled-components";
 import formatDate from "../utils/formatDate";
 import DisplayRangeEl from "../components/DisplayRangeEl";
+import { useNavigate } from "react-router-dom";
 
 // Import Icons
 import { TiStarFullOutline } from "react-icons/ti";
@@ -15,6 +16,8 @@ import { FiCalendar } from "react-icons/fi";
 import { FiCoffee } from "react-icons/fi";
 
 const Restaurant = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const { restaurants } = useGlobalContext();
@@ -32,7 +35,10 @@ const Restaurant = () => {
       <Content>
         <div className="page-wrapper">
           <div className="icons">
-            <IoIosCloseCircleOutline className="close-btn" />
+            <IoIosCloseCircleOutline
+              className="close-btn"
+              onClick={() => navigate("/")}
+            />
             <GoKebabHorizontal className="menu-btn" />
           </div>
           <div className="restaurant-content">
@@ -81,7 +87,7 @@ export default Restaurant;
 
 const Content = styled.div`
   min-height: calc(100vh - 137px);
-  /* background-color: aliceblue; */
+  background-color: var(--bg-third-color);
   padding: var(--container-padding);
 
   display: flex;
@@ -146,10 +152,6 @@ const Content = styled.div`
   .cuisine {
     display: flex;
     align-items: center;
-  }
-
-  .date_cuisine {
-    gap: 55px;
   }
 
   .date,
