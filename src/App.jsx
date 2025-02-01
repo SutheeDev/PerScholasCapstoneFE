@@ -48,8 +48,8 @@ const App = () => {
           <Route path="/" element={<DashboardLayout />}>
             <Route index element={<Home />} />
             <Route path="/create" element={<CreateRestaurant />} />
-            <Route path="/restaurant/:id" element={<Restaurant />} />
           </Route>
+          <Route path="/restaurant/:id" element={<Restaurant />} />
 
           {/* Propably don't need this update route here, let's see*/}
           {/* <Route path="/restaurant/update" element={<UpdateRestaurant />} /> */}
