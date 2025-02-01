@@ -27,6 +27,6 @@ const CardsContainer = styled.div`
   .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+    gap: var(--cards-gap);
   }
 `;

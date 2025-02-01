@@ -1,6 +1,9 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ restaurant }) => {
+  const navigate = useNavigate();
+
   const date = new Date(restaurant.visitDate);
 
   // Format date
@@ -11,8 +14,12 @@ const Card = ({ restaurant }) => {
     day: "numeric",
   }).format(date);
 
+  const handleClick = (e) => {
+    navigate(`/restaurant/${restaurant._id}`);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={handleClick}>
       <div className="image">
         <img src={restaurant.image} alt={restaurant.name} />
       </div>
@@ -28,9 +35,9 @@ const Card = ({ restaurant }) => {
 export default Card;
 
 const Wrapper = styled.div`
-  width: 408px;
-  height: 304px;
-  border-radius: 12px;
+  max-width: var(--card-width);
+  /* max-height: var(--card-height); */
+  border-radius: var(--card-radius);
   overflow: hidden;
   background-color: var(--bg-secondary-color);
   cursor: pointer;
@@ -53,7 +60,7 @@ const Wrapper = styled.div`
   }
 
   .card-content {
-    padding: 15px;
+    padding: 10px 15px;
     font-family: var(--primary-font-medium);
   }
   .card-content h4 {

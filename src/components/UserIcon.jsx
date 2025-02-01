@@ -17,7 +17,7 @@ const UserIcon = () => {
 export default UserIcon;
 
 const Wrapper = styled.div`
-  width: 60px;
+  width: 40px;
   display: flex;
   gap: 4px;
   justify-content: space-between;
@@ -31,6 +31,10 @@ const Wrapper = styled.div`
     display: grid;
     place-items: center;
     font-size: 40px;
+  }
+
+  .userIcon-container svg {
+    width: var(--user-icon-size);
   }
 
   .down-arrow-container {

@@ -11,8 +11,8 @@ const NavigationIcon = ({ icon, destination }) => {
 export default NavigationIcon;
 
 const Wrapper = styled.div`
-  width: 36px;
-  height: 36px;
+  width: var(--nav-icon-size);
+  height: var(--nav-icon-size);
   display: grid;
   place-items: center;
   font-size: 32px;

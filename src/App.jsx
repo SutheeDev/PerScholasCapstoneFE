@@ -4,6 +4,7 @@ import {
   Home,
   Error,
   CreateRestaurant,
+  Restaurant,
   UpdateRestaurant,
   UpdateUser,
   DashboardLayout,
@@ -47,7 +48,7 @@ const App = () => {
           <Route path="/" element={<DashboardLayout />}>
             <Route index element={<Home />} />
             <Route path="/create" element={<CreateRestaurant />} />
-            <Route path="/restaurant" element={<UpdateRestaurant />} />
+            <Route path="/restaurant/:id" element={<Restaurant />} />
           </Route>
 
           {/* Propably don't need this update route here, let's see*/}

@@ -36,7 +36,7 @@ const Wrapper = styled.div`
     outline: none;
     border: none;
     padding: 10.25px 10px;
-    border-radius: 8px;
+    border-radius: var(--form-radius);
     background-color: var(--bg-secondary-color);
   }
 `;

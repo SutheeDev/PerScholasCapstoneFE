@@ -251,7 +251,7 @@ const CardsContainer = styled.div`
     outline: none;
     border: none;
     padding: 10.25px 10px;
-    border-radius: 8px;
+    border-radius: var(--form-radius);
     background-color: var(--bg-secondary-color);
     font-family: var(--primary-font-light);
     font-size: 14px;
@@ -267,7 +267,7 @@ const CardsContainer = styled.div`
     outline: none;
     border: none;
     padding: 10.25px 10px;
-    border-radius: 8px;
+    border-radius: var(--form-radius);
     background-color: var(--bg-secondary-color);
     color: var(--text-third-color);
   }
@@ -284,7 +284,7 @@ const CardsContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: var(--card-radius);
   }
 
   .image-upload-btn {
