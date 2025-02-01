@@ -32,7 +32,13 @@ const Wrapper = styled.div`
   height: 304px;
   border-radius: 12px;
   overflow: hidden;
-  background-color: wheat;
+  background-color: var(--bg-secondary-color);
+  cursor: pointer;
+
+  transition: all 0.1s ease;
+  &:hover {
+    transform: scale(1.01);
+  }
 
   .image {
     width: 100%;

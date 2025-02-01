@@ -91,6 +91,12 @@ const CreateRestaurant = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { name, rating, visitDate } = entry;
+
+    if (!name || !rating || !visitDate) {
+      return;
+    }
+
     try {
       const response = await apiClient.post(`/restaurants/${userId}`, entry);
       const newRestaurant = response.data;
@@ -187,10 +193,14 @@ const CreateRestaurant = () => {
             range={entry.priceRange.length}
           />
 
-          <button className="btn" type="submit">
-            Save Entry
-          </button>
-          <Link to="/">Cancel</Link>
+          <div className="btn-container">
+            <button className="btn save-btn" type="submit">
+              Save Entry
+            </button>
+            <Link to="/" className="btn cancel-btn">
+              Cancel
+            </Link>
+          </div>
         </div>
       </form>
     </CardsContainer>
@@ -206,6 +216,7 @@ const CardsContainer = styled.div`
 
   form {
     display: flex;
+    align-items: flex-start;
     gap: 55px;
   }
 
@@ -265,11 +276,13 @@ const CardsContainer = styled.div`
 
   .file-upload-container {
     width: 50%;
+    aspect-ratio: 1 / 1;
     background-color: var(--bg-secondary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-radius: 8px;
   }
 
   .image-upload-btn {
@@ -290,5 +303,30 @@ const CardsContainer = styled.div`
     width: 380px;
     text-align: center;
     word-break: break-word;
+  }
+
+  .btn-container {
+    margin-top: 32px;
+  }
+
+  .save-btn {
+    background-color: var(--text-secondary-color);
+    color: var(--bg-color);
+    margin-right: 20px;
+
+    transition: all 0.1s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .cancel-btn {
+    background-color: var(--bg-secondary-color);
+    color: var(--text-third-color);
+
+    transition: all 0.1s ease;
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 `;
