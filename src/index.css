@@ -80,4 +80,5 @@ body {
 .page-wrapper {
   max-width: var(--wrapper-width);
   margin: 0 auto;
+  position: relative;
 }
