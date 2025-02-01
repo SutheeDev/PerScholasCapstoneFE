@@ -19,11 +19,9 @@ const Restaurant = () => {
 
   const { restaurants } = useGlobalContext();
   const restaurant = restaurants.find((res) => res._id === id);
-  console.log(restaurant);
 
   const date = new Date(restaurant.visitDate);
   const formattedDate = formatDate(date);
-  console.log(formattedDate);
 
   const rating = restaurant.rating;
   const price = restaurant.priceRange.length;
@@ -54,7 +52,7 @@ const Restaurant = () => {
                 </div>
               </div>
               <p className="review">{restaurant.review}</p>
-              <div>
+              <div className="rating_price">
                 <div className="rating">
                   <p>Rating</p>
                   <DisplayRangeEl
@@ -171,5 +169,23 @@ const Content = styled.div`
 
   .review {
     max-width: 500px;
+  }
+
+  .restaurant-details h2,
+  .date_cuisine,
+  .review {
+    margin-bottom: 30px;
+  }
+
+  .rating_price {
+    display: flex;
+    align-items: center;
+  }
+
+  .date,
+  .cuisine,
+  .rating,
+  .price {
+    width: 50%;
   }
 `;
