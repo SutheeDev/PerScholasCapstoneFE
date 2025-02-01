@@ -1,18 +1,13 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import formatDate from "../utils/formatDate";
 
 const Card = ({ restaurant }) => {
   const navigate = useNavigate();
 
   const date = new Date(restaurant.visitDate);
-
   // Format date
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat
-  const formattedDate = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(date);
+  const formattedDate = formatDate(date);
 
   const handleClick = (e) => {
     navigate(`/restaurant/${restaurant._id}`);
