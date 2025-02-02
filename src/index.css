@@ -29,6 +29,7 @@
   --gray-200: #f2f2f2;
   --gray-400: #a0abbb;
   --cream: #fffbda;
+  --overlay: #000000bc;
 
   --bg-color: var(--white);
   --text-color: var(--black);
@@ -51,9 +52,11 @@
   --card-height: 285px;
   --cards-gap: 20px;
   --wrapper-width: 1180px;
+
+  /* Radius */
+  --btn-radius: 44px;
   --card-radius: 12px;
   --form-radius: 8px;
-  --btn-radius: 44px;
 }
 
 body {

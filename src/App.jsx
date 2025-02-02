@@ -17,6 +17,7 @@ const globalContext = createContext();
 const App = () => {
   const [user, setUser] = useState({});
   const [restaurants, setRestaurants] = useState([]);
+  const [isAlert, setIsAlert] = useState(false);
 
   const getUser = async () => {
     try {
@@ -42,7 +43,9 @@ const App = () => {
   }, []);
 
   return (
-    <globalContext.Provider value={{ user, restaurants, setRestaurants }}>
+    <globalContext.Provider
+      value={{ user, restaurants, setRestaurants, isAlert, setIsAlert }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<DashboardLayout />}>
