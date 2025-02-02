@@ -14,8 +14,8 @@ const Alert = () => {
   const handleDelete = async () => {
     try {
       const response = await apiClient.delete(`/restaurants/${userId}/${id}`);
-      // const deletedRes = response.data;
-      // setRestaurants(restaurants.filter((res) => res._id !== deletedRes._id));
+      const deletedRes = response.data;
+      setRestaurants(restaurants.filter((res) => res._id !== deletedRes._id));
       setIsAlert(false);
       navigate("/");
     } catch (error) {

@@ -3,18 +3,42 @@ import { RateRangeEl, FormRow } from "../components";
 import DatePicker from "react-datepicker";
 import { Link, useParams } from "react-router-dom";
 import { useGlobalContext } from "../App";
+import formatDate from "../utils/formatDate";
+import { useState } from "react";
 
 const UpdateRestaurant = () => {
   const { restaurants } = useGlobalContext();
   const { id } = useParams();
 
   const restaurant = restaurants.find((res) => res._id === id);
-  // console.log(restaurant);
+
+  // const date = restaurant.visitDate;
+  // const formattedDate = formatDate(date);
+  // console.log(formattedDate);
+
+  const cuisine = restaurant.cuisine;
+  const review = restaurant.review;
+  const priceRange = restaurant.priceRange;
+  const imageUrl = restaurant.image;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Save update!");
   };
+
+  const initialState = {
+    name: restaurant.name,
+    cuisine: cuisine || "",
+    visitDate: restaurant.visitDate,
+    rating: restaurant.rating,
+    review: review || "",
+    priceRange: priceRange || 0,
+    image:
+      imageUrl ||
+      "https://res.cloudinary.com/dnc7potxo/image/upload/v1738184597/DineDiary/placeholder-image.png",
+  };
+
+  const [entry, setEntry] = useState(initialState);
 
   return (
     <CardsContainer>
@@ -45,9 +69,9 @@ const UpdateRestaurant = () => {
             <FormRow
               type={"text"}
               name={"title"}
-              // value={entry.name}
-              // handleChange={(e) => setEntry({ ...entry, name: e.target.value })}
-              // placeholder="Title"
+              value={entry.name}
+              handleChange={(e) => setEntry({ ...entry, name: e.target.value })}
+              placeholder="Title"
             />
 
             <div>
@@ -56,9 +80,9 @@ const UpdateRestaurant = () => {
                 rows={8}
                 name="review"
                 id="review"
-                // value={entry.review}
-                // onChange={(e) => setEntry({ ...entry, review: e.target.value })}
-                // placeholder="Add a Description"
+                value={entry.review}
+                onChange={(e) => setEntry({ ...entry, review: e.target.value })}
+                placeholder="Add a Description"
               ></textarea>
             </div>
 
@@ -66,11 +90,11 @@ const UpdateRestaurant = () => {
             <FormRow
               type={"text"}
               name={"cuisine"}
-              // value={entry.cuisine}
-              // handleChange={(e) =>
-              //   setEntry({ ...entry, cuisine: e.target.value })
-              // }
-              // placeholder="Cuisine"
+              value={entry.cuisine}
+              handleChange={(e) =>
+                setEntry({ ...entry, cuisine: e.target.value })
+              }
+              placeholder="Cuisine"
             />
 
             {/* visitDate */}
