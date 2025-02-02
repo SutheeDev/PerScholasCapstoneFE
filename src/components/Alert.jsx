@@ -1,9 +1,25 @@
 import styled from "styled-components";
 import { useGlobalContext } from "../App";
 import { useEffect } from "react";
+import apiClient from "../utils/apiClient";
+import { useParams, useNavigate } from "react-router-dom";
 
 const Alert = () => {
-  const { setIsAlert } = useGlobalContext();
+  const { setIsAlert, user, restaurants } = useGlobalContext();
+  const userId = user._id;
+  const { id } = useParams();
+
+  const navigate = useNavigate();
+
+  const handleDelete = async () => {
+    try {
+      await apiClient.delete(`/restaurants/${userId}/${id}`);
+      setIsAlert(false);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -11,7 +27,7 @@ const Alert = () => {
     return () => {
       document.body.style.overflow = "auto";
     };
-  });
+  }, [restaurants]);
 
   return (
     <Wrapper>
@@ -25,7 +41,9 @@ const Alert = () => {
           <button className="btn cancel-btn" onClick={() => setIsAlert(false)}>
             Cancel
           </button>
-          <button className="btn delete-btn">Delete</button>
+          <button className="btn delete-btn" onClick={handleDelete}>
+            Delete
+          </button>
         </div>
       </div>
     </Wrapper>
@@ -35,9 +53,9 @@ export default Alert;
 
 const Wrapper = styled.div`
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   background-color: var(--overlay);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: grid;

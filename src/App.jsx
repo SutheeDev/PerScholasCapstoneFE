@@ -40,7 +40,7 @@ const App = () => {
   useEffect(() => {
     getUser();
     getRestaurants();
-  }, []);
+  }, [restaurants]);
 
   return (
     <globalContext.Provider
