@@ -29,7 +29,8 @@ const Restaurant = () => {
   const formattedDate = formatDate(date);
 
   const rating = restaurant.rating;
-  const price = restaurant.priceRange.length;
+  let price;
+  restaurant.priceRange ? (price = restaurant.priceRange.length) : (price = 0);
 
   return (
     <main>
