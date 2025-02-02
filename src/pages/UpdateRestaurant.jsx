@@ -21,6 +21,11 @@ const UpdateRestaurant = () => {
   const priceRange = restaurant.priceRange;
   const imageUrl = restaurant.image;
 
+  const handleDate = (date) => {
+    const isoDate = date.toISOString();
+    setEntry({ ...entry, visitDate: isoDate });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Save update!");
@@ -94,18 +99,18 @@ const UpdateRestaurant = () => {
               handleChange={(e) =>
                 setEntry({ ...entry, cuisine: e.target.value })
               }
-              placeholder="Cuisine"
+              placeholder="Add a Cuisine"
             />
 
             {/* visitDate */}
             {/* https://reactdatepicker.com/ */}
             <label htmlFor="date">Date Visit</label>
             <DatePicker
-              // selected={entry.visitDate}
-              // onChange={(date) => handleDate(date)}
+              selected={entry.visitDate}
+              onChange={(date) => handleDate(date)}
               closeOnScroll={true}
               maxDate={new Date()}
-              // placeholderText="Click to select a date"
+              placeholderText="Click to select a date"
               dateFormat="MM / dd / yyyy"
             />
 
