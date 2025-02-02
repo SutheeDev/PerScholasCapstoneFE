@@ -40,7 +40,7 @@ const App = () => {
   useEffect(() => {
     getUser();
     getRestaurants();
-  }, [restaurants]);
+  }, []);
 
   return (
     <globalContext.Provider
@@ -51,6 +51,10 @@ const App = () => {
           <Route path="/" element={<DashboardLayout />}>
             <Route index element={<Home />} />
             <Route path="/create" element={<CreateRestaurant />} />
+            <Route
+              path="/restaurant/update/:id"
+              element={<UpdateRestaurant />}
+            />
           </Route>
           <Route path="/restaurant/:id" element={<Restaurant />} />
 

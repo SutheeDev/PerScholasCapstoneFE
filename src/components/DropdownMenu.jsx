@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import { useGlobalContext } from "../App";
+import { useNavigate, useParams } from "react-router-dom";
 
 const DropdownMenu = () => {
   const { setIsAlert } = useGlobalContext();
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   return (
     <Wrapper>
       <div className="dropdown">
-        <div className="edit-menu">
+        <div
+          className="edit-menu"
+          onClick={() => navigate(`/restaurant/update/${id}`)}
+        >
           <p>Edit</p>
         </div>
         <div className="delete-menu" onClick={() => setIsAlert(true)}>

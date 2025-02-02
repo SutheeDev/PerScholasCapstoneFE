@@ -5,7 +5,7 @@ import apiClient from "../utils/apiClient";
 import { useParams, useNavigate } from "react-router-dom";
 
 const Alert = () => {
-  const { setIsAlert, user, restaurants } = useGlobalContext();
+  const { setIsAlert, user, restaurants, setRestaurants } = useGlobalContext();
   const userId = user._id;
   const { id } = useParams();
 
@@ -13,7 +13,9 @@ const Alert = () => {
 
   const handleDelete = async () => {
     try {
-      await apiClient.delete(`/restaurants/${userId}/${id}`);
+      const response = await apiClient.delete(`/restaurants/${userId}/${id}`);
+      const deletedRes = response.data;
+      setRestaurants(restaurants.filter((res) => res._id !== deletedRes._id));
       setIsAlert(false);
       navigate("/");
     } catch (error) {
