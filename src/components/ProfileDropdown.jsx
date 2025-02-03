@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({
+  isProfileDropdownOpen,
+  setIsProfileDropdownOpen,
+}) => {
   const navigate = useNavigate();
 
   return (
@@ -9,7 +12,10 @@ const ProfileDropdown = () => {
       <div className="dropdown">
         <div
           className="update-profile-menu"
-          onClick={() => navigate("/user/update")}
+          onClick={() => {
+            navigate("/user/update");
+            setIsProfileDropdownOpen(!isProfileDropdownOpen);
+          }}
         >
           <p>Update Profile</p>
         </div>

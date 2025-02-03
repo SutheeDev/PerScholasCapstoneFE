@@ -14,7 +14,12 @@ const UserIcon = () => {
       <div className="down-arrow-container">
         <IoChevronDown />
       </div>
-      {isProfileDropdownOpen && <ProfileDropdown />}
+      {isProfileDropdownOpen && (
+        <ProfileDropdown
+          setIsProfileDropdownOpen={setIsProfileDropdownOpen}
+          isProfileDropdownOpen={isProfileDropdownOpen}
+        />
+      )}
     </Wrapper>
   );
 };

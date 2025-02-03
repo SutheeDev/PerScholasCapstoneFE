@@ -44,7 +44,14 @@ const App = () => {
 
   return (
     <globalContext.Provider
-      value={{ user, restaurants, setRestaurants, isAlert, setIsAlert }}
+      value={{
+        user,
+        setUser,
+        restaurants,
+        setRestaurants,
+        isAlert,
+        setIsAlert,
+      }}
     >
       <BrowserRouter>
         <Routes>
