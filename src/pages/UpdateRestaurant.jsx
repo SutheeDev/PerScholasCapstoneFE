@@ -6,6 +6,11 @@ import { useGlobalContext } from "../App";
 import formatDate from "../utils/formatDate";
 import { useState } from "react";
 
+// Import Icons
+import { TiStarFullOutline } from "react-icons/ti";
+import { BiDollar } from "react-icons/bi";
+import { BsUpload } from "react-icons/bs";
+
 const UpdateRestaurant = () => {
   const { restaurants } = useGlobalContext();
   const { id } = useParams();
@@ -24,6 +29,14 @@ const UpdateRestaurant = () => {
   const handleDate = (date) => {
     const isoDate = date.toISOString();
     setEntry({ ...entry, visitDate: isoDate });
+  };
+
+  const handlePriceRange = (priceRange) => {
+    let priceSymbol = "";
+    for (let i = 0; i < priceRange; i++) {
+      priceSymbol += "$";
+    }
+    setEntry({ ...entry, priceRange: priceSymbol });
   };
 
   const handleSubmit = (e) => {
@@ -116,21 +129,21 @@ const UpdateRestaurant = () => {
 
             {/* Rating */}
             <label htmlFor="rating">Rating</label>
-            {/* <RateRangeEl
+            <RateRangeEl
               Icon={TiStarFullOutline}
               num={5}
               onClick={(e) => setEntry({ ...entry, rating: e })}
               range={entry.rating}
-            /> */}
+            />
 
             {/* PriceRange */}
             <label htmlFor="price">Price</label>
-            {/* <RateRangeEl
+            <RateRangeEl
               Icon={BiDollar}
               num={4}
               onClick={(e) => handlePriceRange(e)}
               range={entry.priceRange.length}
-            /> */}
+            />
 
             <div className="btn-container">
               <button className="btn save-btn" type="submit">
