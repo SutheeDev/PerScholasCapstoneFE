@@ -1,40 +1,33 @@
 import styled from "styled-components";
-import { useGlobalContext } from "../App";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const DropdownMenu = () => {
-  const { setIsAlert } = useGlobalContext();
+const ProfileDropdown = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
 
   return (
     <Wrapper>
       <div className="dropdown">
         <div
-          className="edit-menu"
-          onClick={() => navigate(`/restaurant/update/${id}`)}
+          className="update-profile-menu"
+          onClick={() => navigate("/user/update")}
         >
-          <p>Edit</p>
-        </div>
-        <div className="delete-menu" onClick={() => setIsAlert(true)}>
-          <p>Delete</p>
+          <p>Update Profile</p>
         </div>
       </div>
     </Wrapper>
   );
 };
-export default DropdownMenu;
+export default ProfileDropdown;
 
 const Wrapper = styled.div`
   position: absolute;
-  top: 30px;
-  right: 0;
+  top: 45px;
+  right: -14px;
   background-color: var(--text-secondary-color);
   background-color: var(--white);
-  /* background-color: var(--gray-200); */
   color: var(--bg-color);
   color: var(--black);
-  width: 90px;
+  width: 140px;
   border-radius: var(--form-radius);
   border-radius: 4px;
   padding: 8px;
@@ -47,8 +40,7 @@ const Wrapper = styled.div`
     gap: 10px;
   }
 
-  .edit-menu,
-  .delete-menu {
+  .update-profile-menu {
     text-align: right;
     width: 100%;
     border-radius: 4px;
@@ -58,8 +50,7 @@ const Wrapper = styled.div`
     transition: all 0.1s ease;
   }
 
-  .edit-menu:hover,
-  .delete-menu:hover {
+  .update-profile-menu:hover {
     background-color: var(--gray-200);
   }
 `;

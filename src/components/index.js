@@ -12,6 +12,7 @@ import RateRangeEl from "./RateRangeEl";
 import FormRow from "./FormRow";
 import DisplayRangeEl from "./DisplayRangeEl";
 import DropdownMenu from "./DropdownMenu";
+import ProfileDropdown from "./ProfileDropdown";
 
 export {
   BackIcon,
@@ -28,4 +29,5 @@ export {
   FormRow,
   DisplayRangeEl,
   DropdownMenu,
+  ProfileDropdown,
 };

@@ -55,13 +55,10 @@ const App = () => {
               path="/restaurant/update/:id"
               element={<UpdateRestaurant />}
             />
+            <Route path="/user/update" element={<UpdateUser />} />
           </Route>
           <Route path="/restaurant/:id" element={<Restaurant />} />
 
-          {/* Propably don't need this update route here, let's see*/}
-          {/* <Route path="/restaurant/update" element={<UpdateRestaurant />} /> */}
-
-          <Route path="/user/update" element={<UpdateUser />} />
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

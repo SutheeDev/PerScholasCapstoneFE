@@ -1,16 +1,20 @@
+import { useState } from "react";
+import { ProfileDropdown } from "../components/index";
 import { IoChevronDown } from "react-icons/io5";
 import { HiOutlineUserCircle } from "react-icons/hi2";
 import styled from "styled-components";
 
 const UserIcon = () => {
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(true);
   return (
-    <Wrapper>
+    <Wrapper onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}>
       <div className="userIcon-container">
         <HiOutlineUserCircle />
       </div>
       <div className="down-arrow-container">
         <IoChevronDown />
       </div>
+      {isProfileDropdownOpen && <ProfileDropdown />}
     </Wrapper>
   );
 };
@@ -23,6 +27,8 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+
+  position: relative;
 
   .userIcon-container {
     width: 40px;
