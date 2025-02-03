@@ -64,9 +64,12 @@ const UpdateRestaurant = () => {
         <h1 className="heading">Update Entry</h1>
         <form onSubmit={handleSubmit}>
           {/* Image Upload */}
-          <div className="file-upload-container">
+          <FileUploadContainer
+            className="file-upload-container"
+            bgImg={entry.image}
+          >
             <label htmlFor="image" className="image-upload-btn">
-              {/* <BsUpload className="upload-btn" /> */}
+              <BsUpload className="upload-btn" />
             </label>
             <input
               className="image-upload"
@@ -75,12 +78,12 @@ const UpdateRestaurant = () => {
               id="image"
               // onChange={(e) => handleFileChange(e)}
             />
-            {/* {entry.image ? (
-              <span className="file-name">{entry.image}</span>
+            {entry.image ? (
+              <span className="file-name">Change image</span>
             ) : (
-              <span className="file-name">Choose File</span>
-            )} */}
-          </div>
+              <span className="file-name">Add image</span>
+            )}
+          </FileUploadContainer>
 
           <div className="form-inputs">
             {/* Restaurant name */}
@@ -226,7 +229,7 @@ const CardsContainer = styled.div`
     display: none;
   }
 
-  .file-upload-container {
+  /* .file-upload-container {
     width: 50%;
     aspect-ratio: 1 / 1;
     background-color: var(--bg-secondary-color);
@@ -235,9 +238,9 @@ const CardsContainer = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: var(--card-radius);
-  }
+  } */
 
-  .image-upload-btn {
+  /* .image-upload-btn {
     width: 80px;
     height: 80px;
     display: flex;
@@ -255,7 +258,7 @@ const CardsContainer = styled.div`
     width: 380px;
     text-align: center;
     word-break: break-word;
-  }
+  } */
 
   .btn-container {
     margin-top: 32px;
@@ -280,5 +283,43 @@ const CardsContainer = styled.div`
     &:hover {
       transform: scale(1.05);
     }
+  }
+`;
+
+const FileUploadContainer = styled.div`
+  width: 50%;
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-secondary-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--card-radius);
+
+  background-image: ${(props) =>
+    props.bgImg ? `url(${props.bgImg})` : "none"};
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+
+  .image-upload-btn {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--upload-icon-color);
+    color: var(--bg-color);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+
+  .file-name {
+    width: 380px;
+    text-align: center;
+    word-break: break-word;
   }
 `;
