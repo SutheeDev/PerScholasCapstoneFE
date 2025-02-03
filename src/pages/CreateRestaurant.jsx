@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RateRangeEl, FormRow } from "../components";
 import apiClient from "../utils/apiClient";
 import { useGlobalContext } from "../App";
@@ -218,7 +218,6 @@ const CardsContainer = styled.div`
   padding-right: var(--container-padding);
   padding-bottom: var(--container-padding);
   width: 100%;
-  /* background-color: aliceblue; */
 
   form {
     display: flex;
@@ -229,6 +228,10 @@ const CardsContainer = styled.div`
   .image-upload,
   .form-inputs {
     width: 50%;
+  }
+
+  .react-datepicker-wrapper {
+    display: block;
   }
 
   #image {

@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { RateRangeEl, FormRow } from "../components";
 import DatePicker from "react-datepicker";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../App";
-import formatDate from "../utils/formatDate";
 import { useState } from "react";
 import apiClient from "../utils/apiClient";
 import axios from "axios";
@@ -240,6 +239,10 @@ const CardsContainer = styled.div`
   .image-upload,
   .form-inputs {
     width: 50%;
+  }
+
+  .react-datepicker-wrapper {
+    display: block;
   }
 
   #image {

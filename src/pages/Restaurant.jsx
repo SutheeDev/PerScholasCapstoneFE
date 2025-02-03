@@ -116,13 +116,14 @@ const Content = styled.div`
   .restaurant-img {
     width: 50%;
     border-radius: var(--card-radius);
-    background-color: red;
     overflow: hidden;
   }
 
   .restaurant-img img {
     width: 100%;
+    max-height: 370px;
     display: block;
+    object-fit: cover;
   }
 
   .restaurant-details {

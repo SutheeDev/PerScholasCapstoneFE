@@ -82,7 +82,6 @@ input {
 
 label {
   margin-bottom: 4px;
-  /* color: var(--text-color); */
 }
 
 input,
@@ -105,10 +104,6 @@ textarea {
   padding: 10.25px 10px;
   border-radius: var(--form-radius);
   background-color: var(--bg-secondary-color);
-}
-
-.react-datepicker-wrapper {
-  display: block;
 }
 
 .react-datepicker__input-container input {
