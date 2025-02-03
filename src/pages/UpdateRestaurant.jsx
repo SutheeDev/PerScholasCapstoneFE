@@ -5,6 +5,7 @@ import { Link, useParams } from "react-router-dom";
 import { useGlobalContext } from "../App";
 import formatDate from "../utils/formatDate";
 import { useState } from "react";
+import axios from "axios";
 
 // Import Icons
 import { TiStarFullOutline } from "react-icons/ti";
@@ -16,33 +17,10 @@ const UpdateRestaurant = () => {
   const { id } = useParams();
 
   const restaurant = restaurants.find((res) => res._id === id);
-
-  // const date = restaurant.visitDate;
-  // const formattedDate = formatDate(date);
-  // console.log(formattedDate);
-
   const cuisine = restaurant.cuisine;
   const review = restaurant.review;
   const priceRange = restaurant.priceRange;
   const imageUrl = restaurant.image;
-
-  const handleDate = (date) => {
-    const isoDate = date.toISOString();
-    setEntry({ ...entry, visitDate: isoDate });
-  };
-
-  const handlePriceRange = (priceRange) => {
-    let priceSymbol = "";
-    for (let i = 0; i < priceRange; i++) {
-      priceSymbol += "$";
-    }
-    setEntry({ ...entry, priceRange: priceSymbol });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Save update!");
-  };
 
   const initialState = {
     name: restaurant.name,
@@ -58,6 +36,64 @@ const UpdateRestaurant = () => {
 
   const [entry, setEntry] = useState(initialState);
 
+  const handleDate = (date) => {
+    const isoDate = date.toISOString();
+    setEntry({ ...entry, visitDate: isoDate });
+  };
+
+  const handlePriceRange = (priceRange) => {
+    let priceSymbol = "";
+    for (let i = 0; i < priceRange; i++) {
+      priceSymbol += "$";
+    }
+    setEntry({ ...entry, priceRange: priceSymbol });
+  };
+
+  const presetName = import.meta.env.VITE_UPLOAD_PRESET_NAME;
+  const cloudName = import.meta.env.VITE_CLOUD_NAME;
+
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", presetName);
+    formData.append("folder", "DineDiary");
+
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+      const data = response.data;
+      return data.secure_url;
+    } catch (error) {
+      console.error(
+        "Error uploading image:",
+        error.response?.data || error.message
+      );
+    }
+  };
+
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+
+    const imageUrl = await uploadImage(file);
+
+    if (imageUrl) {
+      setEntry({ ...entry, image: imageUrl });
+    } else {
+      return;
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Save update!");
+  };
+
   return (
     <CardsContainer>
       <div className="page-wrapper">
@@ -66,7 +102,7 @@ const UpdateRestaurant = () => {
           {/* Image Upload */}
           <FileUploadContainer
             className="file-upload-container"
-            bgImg={entry.image}
+            bgimg={entry.image}
           >
             <label htmlFor="image" className="image-upload-btn">
               <BsUpload className="upload-btn" />
@@ -76,7 +112,7 @@ const UpdateRestaurant = () => {
               type="file"
               name="image"
               id="image"
-              // onChange={(e) => handleFileChange(e)}
+              onChange={(e) => handleFileChange(e)}
             />
             {entry.image ? (
               <span className="file-name">Change image</span>
@@ -229,37 +265,6 @@ const CardsContainer = styled.div`
     display: none;
   }
 
-  /* .file-upload-container {
-    width: 50%;
-    aspect-ratio: 1 / 1;
-    background-color: var(--bg-secondary-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--card-radius);
-  } */
-
-  /* .image-upload-btn {
-    width: 80px;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--upload-icon-color);
-    color: var(--bg-color);
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
-
-  .file-name {
-    width: 380px;
-    text-align: center;
-    word-break: break-word;
-  } */
-
   .btn-container {
     margin-top: 32px;
   }
@@ -295,13 +300,40 @@ const FileUploadContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: var(--card-radius);
+  position: relative;
 
   background-image: ${(props) =>
-    props.bgImg ? `url(${props.bgImg})` : "none"};
+    props.bgimg ? `url(${props.bgimg})` : "none"};
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+  overflow: hidden;
+
+  /* Create overlay effect */
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1;
+  }
+
+  &:hover::after {
+    background: var(--upload-overlay);
+  }
+
+  .image-upload-btn,
+  .file-name {
+    position: absolute;
+    z-index: 5;
+    opacity: 0;
+  }
+
+  &:hover .image-upload-btn,
+  &:hover .file-name {
+    opacity: 1;
+  }
 
   .image-upload-btn {
     width: 80px;
@@ -318,6 +350,8 @@ const FileUploadContainer = styled.div`
   }
 
   .file-name {
+    top: 58%;
+    color: var(--bg-color);
     width: 380px;
     text-align: center;
     word-break: break-word;
