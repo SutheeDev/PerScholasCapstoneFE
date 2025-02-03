@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { RateRangeEl, FormRow } from "../components";
 import DatePicker from "react-datepicker";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../App";
 import formatDate from "../utils/formatDate";
 import { useState } from "react";
+import apiClient from "../utils/apiClient";
 import axios from "axios";
 
 // Import Icons
@@ -13,8 +14,10 @@ import { BiDollar } from "react-icons/bi";
 import { BsUpload } from "react-icons/bs";
 
 const UpdateRestaurant = () => {
-  const { restaurants } = useGlobalContext();
+  const { restaurants, user, setRestaurants } = useGlobalContext();
+  const userId = user._id;
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const restaurant = restaurants.find((res) => res._id === id);
   const cuisine = restaurant.cuisine;
@@ -89,16 +92,35 @@ const UpdateRestaurant = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const updateRestaurant = async (e) => {
     e.preventDefault();
-    console.log("Save update!");
+
+    const { name, rating, visitDate } = entry;
+
+    if (!name || !rating || !visitDate) {
+      return;
+    }
+
+    try {
+      const response = await apiClient.patch(
+        `/restaurants/${userId}/${id}`,
+        entry
+      );
+      const updatedRestaurant = response.data;
+      setRestaurants(
+        restaurants.map((res) => (res._id === id ? { ...res, ...entry } : res))
+      );
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <CardsContainer>
       <div className="page-wrapper">
         <h1 className="heading">Update Entry</h1>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={updateRestaurant}>
           {/* Image Upload */}
           <FileUploadContainer
             className="file-upload-container"
@@ -223,7 +245,6 @@ const CardsContainer = styled.div`
 
   label {
     margin-bottom: 4px;
-    /* color: var(--text-color); */
   }
 
   input {
