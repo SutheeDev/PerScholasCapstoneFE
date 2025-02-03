@@ -31,15 +31,17 @@ export default Card;
 
 const Wrapper = styled.div`
   max-width: var(--card-width);
-  /* max-height: var(--card-height); */
   border-radius: var(--card-radius);
   overflow: hidden;
-  background-color: var(--bg-secondary-color);
+  background-color: var(--bg-third-color);
   cursor: pointer;
+
+  box-shadow: var(--card-shadow);
 
   transition: all 0.1s ease;
   &:hover {
     transform: scale(1.01);
+    box-shadow: var(--card-hover);
   }
 
   .image {

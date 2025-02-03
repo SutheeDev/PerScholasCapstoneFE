@@ -22,6 +22,7 @@ export default Home;
 
 const CardsContainer = styled.div`
   padding-right: var(--container-padding);
+  padding-bottom: var(--container-padding);
   width: 100%;
 
   .cards {

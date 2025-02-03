@@ -100,9 +100,6 @@ const Content = styled.div`
   background-color: var(--bg-third-color);
   padding: var(--container-padding);
 
-  display: flex;
-  flex-direction: column;
-
   .icons {
     display: flex;
     justify-content: space-between;

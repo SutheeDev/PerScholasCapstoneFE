@@ -69,7 +69,7 @@ const UpdateUser = () => {
             />
 
             <div className="btn-container">
-              <button className="btn save-btn" type="submit">
+              <button className="btn orange-btn" type="submit">
                 Save Profile
               </button>
               <button
@@ -97,6 +97,11 @@ const CardsContainer = styled.div`
     margin-top: 32px;
     text-align: right;
   }
+
+  /* .save-btn {
+    background-color: var(--text-secondary-color);
+    color: var(--bg-color);
+  } */
 
   .cancel-btn {
     margin-left: 20px;

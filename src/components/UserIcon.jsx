@@ -5,7 +5,7 @@ import { HiOutlineUserCircle } from "react-icons/hi2";
 import styled from "styled-components";
 
 const UserIcon = () => {
-  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(true);
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   return (
     <Wrapper onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}>
       <div className="userIcon-container">

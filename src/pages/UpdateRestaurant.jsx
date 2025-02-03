@@ -207,12 +207,16 @@ const UpdateRestaurant = () => {
             />
 
             <div className="btn-container">
-              <button className="btn save-btn" type="submit">
+              <button className="btn save-btn orange-btn" type="submit">
                 Save Update
               </button>
-              <Link to="/" className="btn cancel-btn">
+              <button
+                to="/"
+                className="btn cancel-btn"
+                onClick={() => navigate("/")}
+              >
                 Cancel
-              </Link>
+              </button>
             </div>
           </div>
         </form>
@@ -238,50 +242,6 @@ const CardsContainer = styled.div`
     width: 50%;
   }
 
-  label,
-  input {
-    display: block;
-  }
-
-  label {
-    margin-bottom: 4px;
-  }
-
-  input {
-    margin-bottom: 16px;
-  }
-
-  input::placeholder {
-    font-family: var(--primary-font-light);
-    font-size: 14px;
-  }
-
-  textarea {
-    width: 100%;
-    outline: none;
-    border: none;
-    padding: 10.25px 10px;
-    border-radius: var(--form-radius);
-    background-color: var(--bg-secondary-color);
-    font-family: var(--primary-font-light);
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
-
-  .react-datepicker-wrapper {
-    display: block;
-  }
-
-  .react-datepicker__input-container input {
-    width: 100%;
-    outline: none;
-    border: none;
-    padding: 10.25px 10px;
-    border-radius: var(--form-radius);
-    background-color: var(--bg-secondary-color);
-    color: var(--text-third-color);
-  }
-
   #image {
     display: none;
   }
@@ -291,24 +251,7 @@ const CardsContainer = styled.div`
   }
 
   .save-btn {
-    background-color: var(--text-secondary-color);
-    color: var(--bg-color);
     margin-right: 20px;
-
-    transition: all 0.1s ease;
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
-  .cancel-btn {
-    background-color: var(--bg-secondary-color);
-    color: var(--text-third-color);
-
-    transition: all 0.1s ease;
-    &:hover {
-      transform: scale(1.05);
-    }
   }
 `;
 
