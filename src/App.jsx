@@ -78,7 +78,6 @@ const App = () => {
             <Route path="/user/update" element={<UpdateUser />} />
           </Route>
           <Route path="/restaurant/:id" element={<Restaurant />} />
-
           <Route path="*" element={<Error />} />
         </Routes>
       </BrowserRouter>

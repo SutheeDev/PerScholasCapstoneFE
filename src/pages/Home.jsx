@@ -9,7 +9,9 @@ const Home = () => {
   return (
     <CardsContainer>
       <div className="page-wrapper">
-        <h1 className="heading">{`Welcome ${user.name}!`}</h1>
+        <h1 className="heading">
+          {user.name ? `Welcome ${user.name}` : "Welcome"}
+        </h1>
         {isLoading ? (
           <Loading />
         ) : (
