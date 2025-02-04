@@ -18,5 +18,4 @@ export default DashboardLayout;
 const Content = styled.div`
   display: flex;
   min-height: calc(100vh - 137px);
-  /* background-color: wheat; */
 `;

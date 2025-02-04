@@ -31,7 +31,6 @@ const Wrapper = styled.div`
   right: 0;
   background-color: var(--text-secondary-color);
   background-color: var(--white);
-  /* background-color: var(--gray-200); */
   color: var(--bg-color);
   color: var(--black);
   width: 90px;

@@ -98,11 +98,6 @@ const CardsContainer = styled.div`
     text-align: right;
   }
 
-  /* .save-btn {
-    background-color: var(--text-secondary-color);
-    color: var(--bg-color);
-  } */
-
   .cancel-btn {
     margin-left: 20px;
   }

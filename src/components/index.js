@@ -1,6 +1,4 @@
-import BackIcon from "./BackIcon";
 import Card from "./Card";
-import CloseIcon from "./CloseIcon";
 import Loading from "./Loading";
 import Logo from "./Logo";
 import Alert from "./Alert";
@@ -15,9 +13,7 @@ import DropdownMenu from "./DropdownMenu";
 import ProfileDropdown from "./ProfileDropdown";
 
 export {
-  BackIcon,
   Card,
-  CloseIcon,
   Loading,
   Logo,
   Alert,
