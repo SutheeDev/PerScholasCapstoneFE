@@ -53,7 +53,6 @@ const Wrapper = styled.div`
     min-height: 220px;
     max-height: 220px;
     object-fit: cover;
-    background-color: red;
   }
 
   .card-content {

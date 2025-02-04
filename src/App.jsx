@@ -18,6 +18,7 @@ const App = () => {
   const [user, setUser] = useState({});
   const [restaurants, setRestaurants] = useState([]);
   const [isAlert, setIsAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getUser = async () => {
     try {
@@ -38,8 +39,19 @@ const App = () => {
   };
 
   useEffect(() => {
-    getUser();
-    getRestaurants();
+    const loadingPage = async () => {
+      try {
+        setIsLoading(true);
+        await getUser();
+        await getRestaurants();
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+        setIsLoading(false);
+      }
+    };
+
+    loadingPage();
   }, []);
 
   return (
@@ -51,6 +63,7 @@ const App = () => {
         setRestaurants,
         isAlert,
         setIsAlert,
+        isLoading,
       }}
     >
       <BrowserRouter>

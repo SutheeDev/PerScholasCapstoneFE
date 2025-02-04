@@ -1,19 +1,24 @@
-import { Card } from "../components/index";
+import { Card, Loading } from "../components/index";
 import { useGlobalContext } from "../App";
+
 import styled from "styled-components";
 
 const Home = () => {
-  const { user, restaurants } = useGlobalContext();
+  const { user, restaurants, isLoading } = useGlobalContext();
 
   return (
     <CardsContainer>
       <div className="page-wrapper">
         <h1 className="heading">{`Welcome ${user.name}!`}</h1>
-        <section className="cards">
-          {restaurants.map((res) => (
-            <Card key={res._id} restaurant={res} />
-          ))}
-        </section>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <section className="cards">
+            {restaurants.map((res) => (
+              <Card key={res._id} restaurant={res} />
+            ))}
+          </section>
+        )}
       </div>
     </CardsContainer>
   );
