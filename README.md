@@ -1,6 +1,6 @@
 # Per Scholas Capstone Project (Front End)
 
-![The Dineary](https://res.cloudinary.com/dnc7potxo/image/upload/v1738697409/ReadMe-Images/Dineary/Home.png)
+![The Dineary](https://res.cloudinary.com/dnc7potxo/image/upload/v1738698549/ReadMe-Images/Dineary/Home.png)
 <br><br>
 
 Welcome to Per Scholas Capstone Project, where I created , [The Dineary](https://perscholascapstonefe.onrender.com/), a restaurant and dining experience journal application where users can log, manage, and organize their dining experience.
@@ -34,7 +34,7 @@ Welcome to Per Scholas Capstone Project, where I created , [The Dineary](https:/
 
 ### Create Restaurant Entry Page
 
-![Create Entry Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738697121/ReadMe-Images/Dineary/Create_Entry.png)
+![Create Entry Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738698477/ReadMe-Images/Dineary/Create_Entry.png)
 
 - Allows users to input restaurant details: title, review, cuisine, visit date, rating, and price range.
 - Users can upload an image, which is stored in Cloudinary.
@@ -44,7 +44,7 @@ Welcome to Per Scholas Capstone Project, where I created , [The Dineary](https:/
 
 ### Restaurant Page
 
-![Restaurant Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738697291/ReadMe-Images/Dineary/Reataurant_Page.png)
+![Restaurant Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738698510/ReadMe-Images/Dineary/Restaurant_Page.png)
 
 - Clicking a restaurant card navigates to the detailed restaurant page.
 - Includes a close icon to return to the Home Page.
@@ -54,7 +54,7 @@ Welcome to Per Scholas Capstone Project, where I created , [The Dineary](https:/
 
 ### Update Restaurant Entry Page
 
-![Update Entry Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738697380/ReadMe-Images/Dineary/Update_Entry.png)
+![Update Entry Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738698545/ReadMe-Images/Dineary/Update_Entry.png)
 
 - Pre-populated with existing restaurant data for easy editing.
 - Users can modify text fields and replace the image.
@@ -68,7 +68,7 @@ Welcome to Per Scholas Capstone Project, where I created , [The Dineary](https:/
 
 ### Update Profile Page
 
-![Profile Update Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738697130/ReadMe-Images/Dineary/Profile_Update.png)
+![Profile Update Page](https://res.cloudinary.com/dnc7potxo/image/upload/v1738698477/ReadMe-Images/Dineary/Profile_Update.png)
 
 - Accessible via the user icon in the navbar.
 - Allows users to update their **name**, **last name**, and **email**.
