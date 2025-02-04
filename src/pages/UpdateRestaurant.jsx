@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { RateRangeEl, FormRow } from "../components";
+import { RateRangeEl, FormRow, Loading } from "../components";
 import DatePicker from "react-datepicker";
 import { useParams, useNavigate } from "react-router-dom";
 import { useGlobalContext } from "../App";
@@ -13,7 +13,8 @@ import { BiDollar } from "react-icons/bi";
 import { BsUpload } from "react-icons/bs";
 
 const UpdateRestaurant = () => {
-  const { restaurants, user, setRestaurants } = useGlobalContext();
+  const { restaurants, user, setRestaurants, setIsLoading, isLoading } =
+    useGlobalContext();
   const userId = user._id;
   const { id } = useParams();
   const navigate = useNavigate();
@@ -100,6 +101,8 @@ const UpdateRestaurant = () => {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       const response = await apiClient.patch(
         `/restaurants/${userId}/${id}`,
@@ -112,6 +115,8 @@ const UpdateRestaurant = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -119,106 +124,114 @@ const UpdateRestaurant = () => {
     <CardsContainer>
       <div className="page-wrapper">
         <h1 className="heading">Update Entry</h1>
-        <form onSubmit={updateRestaurant}>
-          {/* Image Upload */}
-          <FileUploadContainer
-            className="file-upload-container"
-            bgimg={entry.image}
-          >
-            <label htmlFor="image" className="image-upload-btn">
-              <BsUpload className="upload-btn" />
-            </label>
-            <input
-              className="image-upload"
-              type="file"
-              name="image"
-              id="image"
-              onChange={(e) => handleFileChange(e)}
-            />
-            {entry.image ? (
-              <span className="file-name">Change image</span>
-            ) : (
-              <span className="file-name">Add image</span>
-            )}
-          </FileUploadContainer>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <form onSubmit={updateRestaurant}>
+            {/* Image Upload */}
+            <FileUploadContainer
+              className="file-upload-container"
+              bgimg={entry.image}
+            >
+              <label htmlFor="image" className="image-upload-btn">
+                <BsUpload className="upload-btn" />
+              </label>
+              <input
+                className="image-upload"
+                type="file"
+                name="image"
+                id="image"
+                onChange={(e) => handleFileChange(e)}
+              />
+              {entry.image ? (
+                <span className="file-name">Change image</span>
+              ) : (
+                <span className="file-name">Add image</span>
+              )}
+            </FileUploadContainer>
 
-          <div className="form-inputs">
-            {/* Restaurant name */}
-            <FormRow
-              type={"text"}
-              name={"title"}
-              value={entry.name}
-              handleChange={(e) => setEntry({ ...entry, name: e.target.value })}
-              placeholder="Title"
-            />
+            <div className="form-inputs">
+              {/* Restaurant name */}
+              <FormRow
+                type={"text"}
+                name={"title"}
+                value={entry.name}
+                handleChange={(e) =>
+                  setEntry({ ...entry, name: e.target.value })
+                }
+                placeholder="Title"
+              />
 
-            <div>
-              <label htmlFor="review">Review</label>
-              <textarea
-                rows={8}
-                name="review"
-                id="review"
-                value={entry.review}
-                onChange={(e) => setEntry({ ...entry, review: e.target.value })}
-                placeholder="Add a Description"
-              ></textarea>
+              <div>
+                <label htmlFor="review">Review</label>
+                <textarea
+                  rows={8}
+                  name="review"
+                  id="review"
+                  value={entry.review}
+                  onChange={(e) =>
+                    setEntry({ ...entry, review: e.target.value })
+                  }
+                  placeholder="Add a Description"
+                ></textarea>
+              </div>
+
+              {/* Cuisine */}
+              <FormRow
+                type={"text"}
+                name={"cuisine"}
+                value={entry.cuisine}
+                handleChange={(e) =>
+                  setEntry({ ...entry, cuisine: e.target.value })
+                }
+                placeholder="Add a Cuisine"
+              />
+
+              {/* visitDate */}
+              {/* https://reactdatepicker.com/ */}
+              <label htmlFor="date">Date Visit</label>
+              <DatePicker
+                selected={entry.visitDate}
+                onChange={(date) => handleDate(date)}
+                closeOnScroll={true}
+                maxDate={new Date()}
+                placeholderText="Click to select a date"
+                dateFormat="MM / dd / yyyy"
+              />
+
+              {/* Rating */}
+              <label htmlFor="rating">Rating</label>
+              <RateRangeEl
+                Icon={TiStarFullOutline}
+                num={5}
+                onClick={(e) => setEntry({ ...entry, rating: e })}
+                range={entry.rating}
+              />
+
+              {/* PriceRange */}
+              <label htmlFor="price">Price</label>
+              <RateRangeEl
+                Icon={BiDollar}
+                num={4}
+                onClick={(e) => handlePriceRange(e)}
+                range={entry.priceRange.length}
+              />
+
+              <div className="btn-container">
+                <button className="btn save-btn orange-btn" type="submit">
+                  Save Update
+                </button>
+                <button
+                  to="/"
+                  className="btn cancel-btn"
+                  onClick={() => navigate("/")}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-
-            {/* Cuisine */}
-            <FormRow
-              type={"text"}
-              name={"cuisine"}
-              value={entry.cuisine}
-              handleChange={(e) =>
-                setEntry({ ...entry, cuisine: e.target.value })
-              }
-              placeholder="Add a Cuisine"
-            />
-
-            {/* visitDate */}
-            {/* https://reactdatepicker.com/ */}
-            <label htmlFor="date">Date Visit</label>
-            <DatePicker
-              selected={entry.visitDate}
-              onChange={(date) => handleDate(date)}
-              closeOnScroll={true}
-              maxDate={new Date()}
-              placeholderText="Click to select a date"
-              dateFormat="MM / dd / yyyy"
-            />
-
-            {/* Rating */}
-            <label htmlFor="rating">Rating</label>
-            <RateRangeEl
-              Icon={TiStarFullOutline}
-              num={5}
-              onClick={(e) => setEntry({ ...entry, rating: e })}
-              range={entry.rating}
-            />
-
-            {/* PriceRange */}
-            <label htmlFor="price">Price</label>
-            <RateRangeEl
-              Icon={BiDollar}
-              num={4}
-              onClick={(e) => handlePriceRange(e)}
-              range={entry.priceRange.length}
-            />
-
-            <div className="btn-container">
-              <button className="btn save-btn orange-btn" type="submit">
-                Save Update
-              </button>
-              <button
-                to="/"
-                className="btn cancel-btn"
-                onClick={() => navigate("/")}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </CardsContainer>
   );

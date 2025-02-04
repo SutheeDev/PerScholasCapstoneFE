@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { RateRangeEl, FormRow } from "../components";
+import { RateRangeEl, FormRow, Loading } from "../components";
 import apiClient from "../utils/apiClient";
 import { useGlobalContext } from "../App";
 
@@ -25,7 +25,7 @@ const initialState = {
 const CreateRestaurant = () => {
   const [entry, setEntry] = useState(initialState);
 
-  const { user, setRestaurants } = useGlobalContext();
+  const { user, setRestaurants, setIsLoading, isLoading } = useGlobalContext();
   const userId = user._id;
 
   const navigate = useNavigate();
@@ -97,6 +97,8 @@ const CreateRestaurant = () => {
       return;
     }
 
+    setIsLoading(true);
+
     try {
       const response = await apiClient.post(`/restaurants/${userId}`, entry);
       const newRestaurant = response.data;
@@ -104,6 +106,8 @@ const CreateRestaurant = () => {
       navigate("/");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -111,103 +115,111 @@ const CreateRestaurant = () => {
     <CardsContainer>
       <div className="page-wrapper">
         <h1 className="heading">Create Entry</h1>
-        <form onSubmit={handleSubmit}>
-          {/* Image Upload */}
-          <div className="file-upload-container">
-            <label htmlFor="image" className="image-upload-btn">
-              <BsUpload className="upload-btn" />
-            </label>
-            <input
-              className="image-upload"
-              type="file"
-              name="image"
-              id="image"
-              onChange={(e) => handleFileChange(e)}
-            />
-            {entry.image ? (
-              <span className="file-name">{entry.image}</span>
-            ) : (
-              <span className="file-name">Choose File</span>
-            )}
-          </div>
-
-          <div className="form-inputs">
-            {/* Restaurant name */}
-            <FormRow
-              type={"text"}
-              name={"title"}
-              value={entry.name}
-              handleChange={(e) => setEntry({ ...entry, name: e.target.value })}
-              placeholder="Title"
-            />
-
-            <div>
-              <label htmlFor="review">Review</label>
-              <textarea
-                rows={8}
-                name="review"
-                id="review"
-                value={entry.review}
-                onChange={(e) => setEntry({ ...entry, review: e.target.value })}
-                placeholder="Add a Description"
-              ></textarea>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <form onSubmit={handleSubmit}>
+            {/* Image Upload */}
+            <div className="file-upload-container">
+              <label htmlFor="image" className="image-upload-btn">
+                <BsUpload className="upload-btn" />
+              </label>
+              <input
+                className="image-upload"
+                type="file"
+                name="image"
+                id="image"
+                onChange={(e) => handleFileChange(e)}
+              />
+              {entry.image ? (
+                <span className="file-name">{entry.image}</span>
+              ) : (
+                <span className="file-name">Choose File</span>
+              )}
             </div>
 
-            {/* Cuisine */}
-            <FormRow
-              type={"text"}
-              name={"cuisine"}
-              value={entry.cuisine}
-              handleChange={(e) =>
-                setEntry({ ...entry, cuisine: e.target.value })
-              }
-              placeholder="Cuisine"
-            />
+            <div className="form-inputs">
+              {/* Restaurant name */}
+              <FormRow
+                type={"text"}
+                name={"title"}
+                value={entry.name}
+                handleChange={(e) =>
+                  setEntry({ ...entry, name: e.target.value })
+                }
+                placeholder="Title"
+              />
 
-            {/* visitDate */}
-            {/* https://reactdatepicker.com/ */}
-            <label htmlFor="date">Date Visit</label>
-            <DatePicker
-              selected={entry.visitDate}
-              onChange={(date) => handleDate(date)}
-              closeOnScroll={true}
-              maxDate={new Date()}
-              placeholderText="Click to select a date"
-              dateFormat="MM / dd / yyyy"
-            />
+              <div>
+                <label htmlFor="review">Review</label>
+                <textarea
+                  rows={8}
+                  name="review"
+                  id="review"
+                  value={entry.review}
+                  onChange={(e) =>
+                    setEntry({ ...entry, review: e.target.value })
+                  }
+                  placeholder="Add a Description"
+                ></textarea>
+              </div>
 
-            {/* Rating */}
-            <label htmlFor="rating">Rating</label>
-            <RateRangeEl
-              Icon={TiStarFullOutline}
-              num={5}
-              onClick={(e) => setEntry({ ...entry, rating: e })}
-              range={entry.rating}
-            />
+              {/* Cuisine */}
+              <FormRow
+                type={"text"}
+                name={"cuisine"}
+                value={entry.cuisine}
+                handleChange={(e) =>
+                  setEntry({ ...entry, cuisine: e.target.value })
+                }
+                placeholder="Cuisine"
+              />
 
-            {/* PriceRange */}
-            <label htmlFor="price">Price</label>
-            <RateRangeEl
-              Icon={BiDollar}
-              num={4}
-              onClick={(e) => handlePriceRange(e)}
-              range={entry.priceRange.length}
-            />
+              {/* visitDate */}
+              {/* https://reactdatepicker.com/ */}
+              <label htmlFor="date">Date Visit</label>
+              <DatePicker
+                selected={entry.visitDate}
+                onChange={(date) => handleDate(date)}
+                closeOnScroll={true}
+                maxDate={new Date()}
+                placeholderText="Click to select a date"
+                dateFormat="MM / dd / yyyy"
+              />
 
-            <div className="btn-container">
-              <button className="btn save-btn orange-btn" type="submit">
-                Save Entry
-              </button>
-              <button
-                to="/"
-                className="btn cancel-btn"
-                onClick={() => navigate("/")}
-              >
-                Cancel
-              </button>
+              {/* Rating */}
+              <label htmlFor="rating">Rating</label>
+              <RateRangeEl
+                Icon={TiStarFullOutline}
+                num={5}
+                onClick={(e) => setEntry({ ...entry, rating: e })}
+                range={entry.rating}
+              />
+
+              {/* PriceRange */}
+              <label htmlFor="price">Price</label>
+              <RateRangeEl
+                Icon={BiDollar}
+                num={4}
+                onClick={(e) => handlePriceRange(e)}
+                range={entry.priceRange.length}
+              />
+
+              <div className="btn-container">
+                <button className="btn save-btn orange-btn" type="submit">
+                  Save Entry
+                </button>
+                <button
+                  to="/"
+                  className="btn cancel-btn"
+                  onClick={() => navigate("/")}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </CardsContainer>
   );

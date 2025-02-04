@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useGlobalContext } from "../App";
-import { FormRow } from "../components";
+import { FormRow, Loading } from "../components";
 import styled from "styled-components";
 import apiClient from "../utils/apiClient";
 import { useNavigate } from "react-router-dom";
 
 const UpdateUser = () => {
-  const { user, setUser } = useGlobalContext();
+  const { user, setUser, isLoading, setIsLoading } = useGlobalContext();
   const id = user._id;
 
   const navigate = useNavigate();
@@ -22,12 +22,16 @@ const UpdateUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setIsLoading(true);
+
     try {
       const response = await apiClient.patch(`/user/${id}`, userState);
       setUser(response.data);
       navigate("/");
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -35,53 +39,57 @@ const UpdateUser = () => {
     <CardsContainer>
       <div className="page-wrapper">
         <h1 className="heading">Profile Update</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="form-inputs">
-            <FormRow
-              type="text"
-              name="name"
-              value={userState.name}
-              handleChange={(e) =>
-                setUserState({ ...userState, name: e.target.value })
-              }
-              placeholder="Name"
-            />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="form-inputs">
+              <FormRow
+                type="text"
+                name="name"
+                value={userState.name}
+                handleChange={(e) =>
+                  setUserState({ ...userState, name: e.target.value })
+                }
+                placeholder="Name"
+              />
 
-            <FormRow
-              type="text"
-              name="lastname"
-              value={userState.lastname}
-              handleChange={(e) =>
-                setUserState({ ...userState, lastname: e.target.value })
-              }
-              labelText="last name"
-              placeholder="Last Name"
-            />
+              <FormRow
+                type="text"
+                name="lastname"
+                value={userState.lastname}
+                handleChange={(e) =>
+                  setUserState({ ...userState, lastname: e.target.value })
+                }
+                labelText="last name"
+                placeholder="Last Name"
+              />
 
-            <FormRow
-              type="email"
-              name="email"
-              value={userState.email}
-              handleChange={(e) =>
-                setUserState({ ...userState, email: e.target.value })
-              }
-              placeholder="Email"
-            />
+              <FormRow
+                type="email"
+                name="email"
+                value={userState.email}
+                handleChange={(e) =>
+                  setUserState({ ...userState, email: e.target.value })
+                }
+                placeholder="Email"
+              />
 
-            <div className="btn-container">
-              <button className="btn orange-btn" type="submit">
-                Save Profile
-              </button>
-              <button
-                to="/"
-                className="btn cancel-btn"
-                onClick={() => navigate("/")}
-              >
-                Cancel
-              </button>
+              <div className="btn-container">
+                <button className="btn orange-btn" type="submit">
+                  Save Profile
+                </button>
+                <button
+                  to="/"
+                  className="btn cancel-btn"
+                  onClick={() => navigate("/")}
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        )}
       </div>
     </CardsContainer>
   );

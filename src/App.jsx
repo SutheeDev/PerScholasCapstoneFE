@@ -64,6 +64,7 @@ const App = () => {
         isAlert,
         setIsAlert,
         isLoading,
+        setIsLoading,
       }}
     >
       <BrowserRouter>
