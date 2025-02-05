@@ -110,8 +110,11 @@ const UpdateRestaurant = () => {
       );
       const updatedRestaurant = response.data;
       setRestaurants(
-        restaurants.map((res) => (res._id === id ? { ...res, ...entry } : res))
+        restaurants
+          .map((res) => (res._id === id ? updatedRestaurant : res))
+          .sort((a, b) => new Date(b.visitDate) - new Date(a.visitDate))
       );
+
       navigate("/");
     } catch (error) {
       console.log(error);

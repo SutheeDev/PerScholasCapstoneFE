@@ -4,7 +4,13 @@ import { useGlobalContext } from "../App";
 import styled from "styled-components";
 import formatDate from "../utils/formatDate";
 import { useNavigate } from "react-router-dom";
-import { Navbar, DisplayRangeEl, DropdownMenu, Alert } from "../components";
+import {
+  Navbar,
+  DisplayRangeEl,
+  DropdownMenu,
+  Alert,
+  Loading,
+} from "../components";
 
 // Import Icons
 import { TiStarFullOutline } from "react-icons/ti";
@@ -22,7 +28,7 @@ const Restaurant = () => {
 
   const { id } = useParams();
 
-  const { restaurants, isAlert } = useGlobalContext();
+  const { restaurants, isAlert, isLoading } = useGlobalContext();
   const restaurant = restaurants.find((res) => res._id === id);
 
   const date = new Date(restaurant.visitDate);
@@ -37,58 +43,62 @@ const Restaurant = () => {
       {isAlert && <Alert />}
       <Navbar />
       <Content>
-        <div className="page-wrapper">
-          <div className="icons">
-            <IoIosCloseCircleOutline
-              className="close-btn"
-              onClick={() => navigate("/")}
-            />
-            <div
-              className="menu-btn-container"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              <GoKebabHorizontal className="menu-btn" />
-              {isDropdownOpen && <DropdownMenu />}
-            </div>
-          </div>
-          <div className="restaurant-content">
-            <div className="restaurant-img">
-              <img src={restaurant.image} alt={restaurant.name} />
-            </div>
-            <div className="restaurant-details">
-              <h2>{restaurant.name}</h2>
-              <div className="date_cuisine">
-                <div className="date">
-                  <FiCalendar />
-                  <p>{formattedDate}</p>
-                </div>
-                <div className="cuisine">
-                  <FiCoffee />
-                  <p>{restaurant.cuisine}</p>
-                </div>
-              </div>
-              <p className="review">{restaurant.review}</p>
-              <div className="rating_price">
-                <div className="rating">
-                  <p>Rating</p>
-                  <DisplayRangeEl
-                    Icon={TiStarFullOutline}
-                    numOfEl="5"
-                    highlightEl={rating}
-                  />
-                </div>
-                <div className="price">
-                  <p>Price</p>
-                  <DisplayRangeEl
-                    Icon={BiDollar}
-                    numOfEl="4"
-                    highlightEl={price}
-                  />
-                </div>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div className="page-wrapper">
+            <div className="icons">
+              <IoIosCloseCircleOutline
+                className="close-btn"
+                onClick={() => navigate("/")}
+              />
+              <div
+                className="menu-btn-container"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <GoKebabHorizontal className="menu-btn" />
+                {isDropdownOpen && <DropdownMenu />}
               </div>
             </div>
+            <div className="restaurant-content">
+              <div className="restaurant-img">
+                <img src={restaurant.image} alt={restaurant.name} />
+              </div>
+              <div className="restaurant-details">
+                <h2>{restaurant.name}</h2>
+                <div className="date_cuisine">
+                  <div className="date">
+                    <FiCalendar />
+                    <p>{formattedDate}</p>
+                  </div>
+                  <div className="cuisine">
+                    <FiCoffee />
+                    <p>{restaurant.cuisine}</p>
+                  </div>
+                </div>
+                <p className="review">{restaurant.review}</p>
+                <div className="rating_price">
+                  <div className="rating">
+                    <p>Rating</p>
+                    <DisplayRangeEl
+                      Icon={TiStarFullOutline}
+                      numOfEl="5"
+                      highlightEl={rating}
+                    />
+                  </div>
+                  <div className="price">
+                    <p>Price</p>
+                    <DisplayRangeEl
+                      Icon={BiDollar}
+                      numOfEl="4"
+                      highlightEl={price}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
       </Content>
     </main>
   );

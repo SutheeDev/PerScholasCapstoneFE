@@ -102,7 +102,11 @@ const CreateRestaurant = () => {
     try {
       const response = await apiClient.post(`/restaurants/${userId}`, entry);
       const newRestaurant = response.data;
-      setRestaurants((prev) => [...prev, newRestaurant]);
+      setRestaurants((prev) =>
+        [...prev, newRestaurant].sort(
+          (a, b) => new Date(b.visitDate) - new Date(a.visitDate)
+        )
+      );
       navigate("/");
     } catch (error) {
       console.log(error);
